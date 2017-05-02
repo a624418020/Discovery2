@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="111dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="17dp"
+    android:paddingBottom="20dp"
+    android:paddingTop="5dp">
+    <RelativeLayout
+        android:id="@+id/rl_01"
+        android:layout_width="match_parent"
+        android:layout_height="37dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="参与成功"
+            android:textSize="13sp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/textblack"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="2017-03-22 10：00：00"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_below="@id/rl_01"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="#FEFEFE">
+        <ImageView
+            android:layout_width="54dp"
+            android:layout_height="54dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="65dp"
+            android:layout_marginRight="30dp">
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="日本设计师井上保美的衣着之道"
+                android:textSize="11dp"
+                android:textColor="@color/textblack"/>
+            <TextView
+                android:id="@+id/tv_subtitle"
+                android:layout_below="@id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:text="活动参与成功，请安排好时间"
+                android:textSize="11dp"
+                android:textColor="@color/gray_one_fives_three"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/icon_next"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
