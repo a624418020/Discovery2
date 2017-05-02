@@ -5,23 +5,30 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import milai.meishipintu.com.faxianlite.constract.ParticipateContract;
 import milai.meishipintu.com.faxianlite.model.beans.Order;
-import milai.meishipintu.com.faxianlite.view.viewinterface.ParticipateInvalidViewInterface;
 
 /**
  * Created by Administrator on 2017/4/28 0028.
  */
 
-public class ParticipateInvalidPresenter {
-    private ParticipateInvalidViewInterface pv;
-    private List<Order> list;
+public class ParticipatePresenter implements ParticipateContract.IPresenter{
 
-    public ParticipateInvalidPresenter (ParticipateInvalidViewInterface pv){
-        this.pv=pv;
+    private ParticipateContract.IView view;
+
+    public ParticipatePresenter(ParticipateContract.IView iView){
+        view = iView;
+    }
+
+
+    @Override
+    public void unsubscrib() {
 
     }
-    public void getdata(){
-        list=new ArrayList<>();
+
+    @Override
+    public void getData(int type) {
+        List<Order> list = new ArrayList<>();
         for(int i=0;i<5;i++){
             Order order=new Order();
             order.setPeople_name("李忠");
@@ -39,7 +46,6 @@ public class ParticipateInvalidPresenter {
             list.add(order);
         }
         Log.i("aaaaa",list.size()+"");
-
-        pv.getdata(list);
+        view.showData(list);
     }
 }

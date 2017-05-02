@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
@@ -26,7 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import milai.meishipintu.com.faxianlite.R;
@@ -34,7 +33,6 @@ import milai.meishipintu.com.faxianlite.Tool.CircleImageView;
 import milai.meishipintu.com.faxianlite.Tool.ToastUtils;
 import milai.meishipintu.com.faxianlite.constract.MineContract;
 import milai.meishipintu.com.faxianlite.presenter.MinePresenter;
-import milai.meishipintu.com.faxianlite.presenter.Presenter;
 import milai.meishipintu.com.faxianlite.view.activity.ParticipateListActivity;
 import milai.meishipintu.com.faxianlite.view.activity.WantActivity;
 
@@ -47,9 +45,9 @@ public class MineFragment extends Fragment implements MineContract.IView {
     private static final int CROP_SMALL_PICTURE = 2;
 
 
-    @Bind(R.id.gv_lattice)
+    @BindView(R.id.gv_lattice)
     GridView mgridlayout;
-    @Bind(R.id.circleimageview)
+    @BindView(R.id.circleimageview)
     CircleImageView civ;
 
     private SimpleAdapter sim_adapter;
@@ -217,12 +215,6 @@ public class MineFragment extends Fragment implements MineContract.IView {
                 }
             }
         });
-    }
-
-    //from MineContract.IView
-    @Override
-    public void setPresenter(Presenter presenter) {
-
     }
 
     //from MineContract.IView

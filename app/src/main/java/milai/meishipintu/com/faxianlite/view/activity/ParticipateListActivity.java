@@ -9,8 +9,7 @@ import java.util.ArrayList;
 
 import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.view.adapter.MyFragmentAdapter;
-import milai.meishipintu.com.faxianlite.view.fargment.ParticipateNormalFragment;
-import milai.meishipintu.com.faxianlite.view.fargment.ParticipateInvalidFragment;
+import milai.meishipintu.com.faxianlite.view.fargment.ParticipateFragment;
 
 public class ParticipateListActivity extends AppCompatActivity {
     private ArrayList<Fragment> fragments;
@@ -21,8 +20,8 @@ public class ParticipateListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_participate_list);
         ViewPager pager = (ViewPager)findViewById(R.id.vp_fragment);
         fragments = new ArrayList<Fragment>();
-        fragments.add(new ParticipateNormalFragment());
-        fragments.add(new ParticipateInvalidFragment());
+        fragments.add(ParticipateFragment.newInstance(1));
+        fragments.add(ParticipateFragment.newInstance(2));
         pager.setAdapter(new MyFragmentAdapter(getSupportFragmentManager(), fragments));
     }
 }

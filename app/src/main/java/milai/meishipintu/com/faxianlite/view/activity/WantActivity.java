@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.constract.WantContract;
@@ -24,7 +24,7 @@ public class WantActivity extends AppCompatActivity implements WantContract.IVie
 
     private String TAG = "RecyclerViewDemo";
 
-    @Bind(R.id.recycler_view)
+    @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
     private WantContract.IPresenter mPresenter;

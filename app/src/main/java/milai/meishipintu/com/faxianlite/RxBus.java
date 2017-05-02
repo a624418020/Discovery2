@@ -28,7 +28,7 @@ public class RxBus {
     private static RxBus defaultInstance;
     private Subject<Object, Object> bus;
 
-    public RxBus() {
+    private RxBus() {
         bus = new SerializedSubject<>(PublishSubject.create());
     }
 

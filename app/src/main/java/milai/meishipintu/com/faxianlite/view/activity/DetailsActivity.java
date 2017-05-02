@@ -4,32 +4,31 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.jude.rollviewpager.RollPagerView;
-import com.jude.rollviewpager.adapter.StaticPagerAdapter;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.constract.DetailContract;
 import milai.meishipintu.com.faxianlite.model.beans.Order;
 import milai.meishipintu.com.faxianlite.presenter.DetailsPresenter;
-import milai.meishipintu.com.faxianlite.presenter.Presenter;
 import milai.meishipintu.com.faxianlite.view.adapter.TestNormalAdapter;
 
 public class DetailsActivity extends AppCompatActivity implements DetailContract.IView{
+
+    @BindView(R.id.roll_view_pager)
+    RollPagerView mRollViewPager;
+
     private List<Order> list;
     private DetailContract.IPresenter mPresenter;
-    private RollPagerView mRollViewPager;
     private String id;
 
     @Override
@@ -44,7 +43,6 @@ public class DetailsActivity extends AppCompatActivity implements DetailContract
         //发现页面跳转带过来的ID
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
-        mRollViewPager = (RollPagerView) findViewById(R.id.roll_view_pager);
         mRollViewPager.setPlayDelay(2000);
         mRollViewPager.setAnimationDurtion(500);
         mRollViewPager.setAdapter(new TestNormalAdapter());

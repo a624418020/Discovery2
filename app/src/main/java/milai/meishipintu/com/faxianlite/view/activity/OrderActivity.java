@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import milai.meishipintu.com.faxianlite.R;
@@ -23,31 +23,31 @@ import milai.meishipintu.com.faxianlite.presenter.OrderPresenter;
 
 public class OrderActivity extends AppCompatActivity implements OrderContract.IView {
 
-    @Bind(R.id.tv_People_name)
+    @BindView(R.id.tv_People_name)
     TextView tvPeopleName;
-    @Bind(R.id.tv_People_phone)
+    @BindView(R.id.tv_People_phone)
     TextView tvPeoplePhone;
-    @Bind(R.id.tv_People_address)
+    @BindView(R.id.tv_People_address)
     TextView tvPeopleAddress;
-    @Bind(R.id.iv_Commodity_image)
+    @BindView(R.id.iv_Commodity_image)
     ImageView ivCommodityImage;
-    @Bind(R.id.tv_Commodity_title)
+    @BindView(R.id.tv_Commodity_title)
     TextView tvCommodityTitle;
-    @Bind(R.id.tv_Commodity_subtitle)
+    @BindView(R.id.tv_Commodity_subtitle)
     TextView tvCommoditySubtitle;
-    @Bind(R.id.tv_Commodity_value)
+    @BindView(R.id.tv_Commodity_value)
     TextView tvCommodityValue;
-    @Bind(R.id.bt_addition)
+    @BindView(R.id.bt_addition)
     RelativeLayout btAddition;
-    @Bind(R.id.tv_Star_time)
+    @BindView(R.id.tv_Star_time)
     TextView tvStarTime;
-    @Bind(R.id.tv_quantity)
+    @BindView(R.id.tv_quantity)
     TextView tvQuantity;
-    @Bind(R.id.rl_success)
+    @BindView(R.id.rl_success)
     RelativeLayout rlSuccess;
-    @Bind(R.id.ed_name)
+    @BindView(R.id.ed_name)
     EditText edName;
-    @Bind(R.id.ed_phone)
+    @BindView(R.id.ed_phone)
     EditText edPhone;
 
     private List<Order> list;
