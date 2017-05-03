@@ -1,6 +1,6 @@
 package milai.meishipintu.com.faxianlite.presenter;
 
-import milai.meishipintu.com.faxianlite.constract.RegisterContract;
+import milai.meishipintu.com.faxianlite.constract.LoginContract;
 import milai.meishipintu.com.faxianlite.model.Retrofit.NetApi;
 import milai.meishipintu.com.faxianlite.model.beans.UserInfo;
 import rx.Subscriber;
@@ -11,26 +11,25 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * Created by Administrator on 2017/5/3.
  * <p>
- * 主要功能：
+ * 功能介绍：
  */
 
-public class RegisterPresenter implements RegisterContract.IPresenter {
+public class LoginPresenter implements LoginContract.IPresenter {
 
-    private RegisterContract.IView iView;
-    private CompositeSubscription subscriptions;
+    private LoginContract.IView iView;
     private NetApi netApi;
+    private CompositeSubscription subscriptions;
 
-    public RegisterPresenter(RegisterContract.IView iView) {
+    public LoginPresenter(LoginContract.IView iView) {
         this.iView = iView;
-        subscriptions = new CompositeSubscription();
         netApi = NetApi.getInstance();
+        subscriptions = new CompositeSubscription();
     }
 
     @Override
     public void getVCode(String tel) {
-        subscriptions.add(netApi.getVerifyCode(tel).observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<String>() {
+        subscriptions.add(netApi.getVerifyCode(tel).subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(Schedulers.io()).subscribe(new Subscriber<String>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -48,8 +47,8 @@ public class RegisterPresenter implements RegisterContract.IPresenter {
     }
 
     @Override
-    public void register(String tel, String vCode, String password) {
-        subscriptions.add(netApi.register(tel,vCode,password).observeOn(Schedulers.io())
+    public void login(String tel, String vCode) {
+        subscriptions.add(netApi.login(1,tel,vCode,null).observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<UserInfo>() {
                     @Override
@@ -63,14 +62,13 @@ public class RegisterPresenter implements RegisterContract.IPresenter {
 
                     @Override
                     public void onNext(UserInfo userInfo) {
-                        iView.onRegisterSuccess(userInfo);
+                        iView.onLoginSuccess(userInfo);
                     }
                 }));
     }
 
     @Override
-    public void registerWeiChat() {
-        //TODO 微信登陸
+    public void loginWeiChat() {
 
     }
 

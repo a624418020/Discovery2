@@ -1,10 +1,13 @@
 package milai.meishipintu.com.faxianlite.model.Retrofit;
 
-import android.support.v4.media.session.PlaybackStateCompat;
+import android.support.annotation.Nullable;
 
 import java.util.List;
 
 import milai.meishipintu.com.faxianlite.model.beans.Recommend;
+import milai.meishipintu.com.faxianlite.model.beans.UserInfo;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import rx.Observable;
 
@@ -15,9 +18,23 @@ import rx.Observable;
 public interface NetService {
 
     //获取推举页面信息
-    @POST("mspt/Applet/applet_news")
+    @POST("/mspt/Applet/applet_news")
     Observable<HttpResult<List<Recommend>>> getRecommendHttp();
 
     //获取验证码
-//    @POST("")
+    @FormUrlEncoded
+    @POST("/Api/Api/getVerifyCodeByMobile")
+    Observable<HttpResult<String>> getVerifyCodeHttp(@Field("mobile") String tel);
+
+    //注册
+    @FormUrlEncoded
+    @POST("/Api/Api/regist")
+    Observable<HttpResult<UserInfo>> registerHttp(@Field("tel") String tel, @Field("verify") String vCode
+            , @Field("password") String password);
+
+    //验证码登录
+    @FormUrlEncoded
+    @POST("/Api/Api/login")
+    Observable<HttpResult<UserInfo>> loginHttp(@Field("type") int type, @Field("tel") String tel
+            , @Nullable @Field("verify") String vcode, @Nullable @Field("password") String password);
 }

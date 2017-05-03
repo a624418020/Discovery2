@@ -10,21 +10,21 @@ import milai.meishipintu.com.faxianlite.view.BasicView;
  * 主要功能：
  */
 
-public interface RegisterContract {
+public interface LoginContract {
 
     interface IPresenter extends BasicPresenter{
 
         void getVCode(String tel);
 
-        void register(String tel, String vCode, String password);
+        void login(String tel, String vCode);
 
-        void registerWeiChat();
+        void loginWeiChat();
     }
 
     interface IView extends BasicView{
 
         void onVCodeGet(String VCode);
 
-        void onRegisterSuccess(UserInfo userInfo);
+        void onLoginSuccess(UserInfo userInfo);
     }
 }
