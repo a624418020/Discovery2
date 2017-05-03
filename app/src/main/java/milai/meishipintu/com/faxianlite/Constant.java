@@ -7,4 +7,8 @@ package milai.meishipintu.com.faxianlite;
  */
 
 public class Constant {
+    public static final int REGISTER = 1001;
+    public static final int REGISTER_SUCCESS = 2001;
+    public static final int LOGIN = 1002;
+    public static final int LOGIN_SUCCESS = 2002;
 }

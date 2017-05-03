@@ -4,8 +4,9 @@
     android:id="@+id/activity_registered"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:background="@color/white"
     tools:context="milai.meishipintu.com.faxianlite.view.activity.RegisteredActivity">
     <RelativeLayout
         android:id="@+id/rl01"
@@ -21,11 +22,13 @@
         android:id="@+id/ll01"
         android:layout_below="@id/rl01"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
         <EditText
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_gravity="center"
             android:hint="请输入手机号"
             android:textColorHint="#999999"/>
         <RelativeLayout
@@ -48,16 +51,24 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/gray_twenty_one_six"/>
-    <EditText
-        android:id="@+id/et_01"
-        android:layout_below="@id/vw01"
+    <RelativeLayout
+        android:id="@+id/rl_02"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textColorHint="#999999"
-        android:hint="请输入验证码"/>
+        android:layout_below="@id/vw01"
+        android:layout_height="50dp">
+        <EditText
+            android:id="@+id/et_01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColorHint="#999999"
+            android:textSize="14sp"
+            android:hint="请输入验证码"/>
+
+    </RelativeLayout>
     <View
         android:id="@+id/vw02"
-        android:layout_below="@id/et_01"
+        android:layout_below="@id/rl_02"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/gray_twenty_one_six"/>

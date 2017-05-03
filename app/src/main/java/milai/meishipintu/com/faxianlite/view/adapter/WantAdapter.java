@@ -19,7 +19,7 @@ import milai.meishipintu.com.faxianlite.Tool.MyRecyclerView;
  */
 
 
-public class WantAdapter extends RecyclerView.Adapter<WantAdapter.MyViewHolder> implements MyRecyclerView.IonSlidingButtonListener {
+public class WantAdapter extends RecyclerView.Adapter<WantedViewHolder> implements MyRecyclerView.IonSlidingButtonListener {
     private Context mContext;
     private IonSlidingViewClickListener mIDeleteBtnClickListener;
     private List<String> mDatas = new ArrayList<String>();
@@ -35,12 +35,14 @@ public class WantAdapter extends RecyclerView.Adapter<WantAdapter.MyViewHolder> 
         this.mDatas = mDatas;
         notifyDataSetChanged();
     }
+
     @Override
     public int getItemCount() {
         return mDatas.size();
     }
+
     @Override
-    public void onBindViewHolder(final WantAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(final WantedViewHolder holder, int position) {
         holder.textView.setText(mDatas.get(position));
         //设置内容布局的宽为屏幕宽度
         WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
@@ -66,13 +68,13 @@ public class WantAdapter extends RecyclerView.Adapter<WantAdapter.MyViewHolder> 
             }
         });
     }
+
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup arg0, int arg1) {
+    public WantedViewHolder onCreateViewHolder(ViewGroup arg0, int arg1) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_want_recycler, arg0,false);
-        MyViewHolder holder = new MyViewHolder(view);
+        WantedViewHolder holder = new WantedViewHolder(view);
         return holder;
     }
-
 
     @Override
     public void onMenuIsOpen(View view) {
@@ -93,32 +95,17 @@ public class WantAdapter extends RecyclerView.Adapter<WantAdapter.MyViewHolder> 
 
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView btn_Delete;
-        public TextView textView;
-        public ViewGroup layout_content;
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            btn_Delete = (TextView) itemView.findViewById(R.id.tv_delete);
-            textView = (TextView) itemView.findViewById(R.id.text);
-            layout_content = (ViewGroup) itemView.findViewById(R.id.layout_content);
-            ((MyRecyclerView) itemView).setSlidingButtonListener(WantAdapter.this);        }    }
     public void removeData(int position){
         mDatas.remove(position);
         notifyItemRemoved(position);
     }
-    /**     * 删除菜单打开信息接收     */
-
-    /**
-     * 滑动或者点击了Item监听
-     * @param slidingButtonView
-     */
 
     /**     * 关闭菜单     */
     public void closeMenu() {
         mMenu.closeMenu();
         mMenu = null;
     }
+
     /**     * 判断是否有菜单打开     */
     public Boolean menuIsOpen() {
         if(mMenu != null){
@@ -126,6 +113,7 @@ public class WantAdapter extends RecyclerView.Adapter<WantAdapter.MyViewHolder> 
         }
         return false;
     }
+
     public interface IonSlidingViewClickListener {
         void onItemClick(View view, int position);
         void onDeleteBtnCilck(View view, int position);

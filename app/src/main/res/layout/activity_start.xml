@@ -20,8 +20,32 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-        <ImageView
+        <TextView
+            android:id="@+id/tv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="100dp"
+            android:text="发现独特的你"
+            android:textColor="@color/splash_text_black"
+            android:textSize="16sp"
+            />
+        <View
+            android:layout_width="30dp"
+            android:layout_height="2dp"
+            android:background="@color/splash_text_black"
+            android:layout_toLeftOf="@id/tv"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="108dp"
+            android:layout_marginRight="20dp"/>
+        <View
+            android:layout_width="30dp"
+            android:layout_height="2dp"
+            android:background="@color/splash_text_black"
+            android:layout_toRightOf="@id/tv"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="108dp"
+            android:layout_marginLeft="20dp"/>
     </RelativeLayout>
 </LinearLayout>

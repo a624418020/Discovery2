@@ -18,7 +18,7 @@ import milai.meishipintu.com.faxianlite.constract.DiscoverContract;
 import milai.meishipintu.com.faxianlite.model.beans.Recommend;
 import milai.meishipintu.com.faxianlite.Tool.DividerItemDecoration;
 import milai.meishipintu.com.faxianlite.Tool.PagingScrollHelper;
-import milai.meishipintu.com.faxianlite.view.adapter.MyAdapter;
+import milai.meishipintu.com.faxianlite.view.adapter.DiscoverAdapter;
 import milai.meishipintu.com.faxianlite.view.adapter.MyPagerAdapter;
 import milai.meishipintu.com.faxianlite.view.adapter.RecommendAdapter;
 import milai.meishipintu.com.faxianlite.presenter.DiscoverPresenter;
@@ -31,7 +31,7 @@ public class DiscoverFragment extends Fragment implements DiscoverContract.IView
     private ArrayList<View> aList;
     private MyPagerAdapter mAdapter;
     private RecommendAdapter adapter;
-    private MyAdapter myAdapter;
+    private DiscoverAdapter discoverAdapter;
     private DiscoverContract.IPresenter mPresenter;
     private DividerItemDecoration vDividerItemDecoration = null;
     private LinearLayoutManager vLinearLayoutManager = null;
@@ -63,8 +63,8 @@ public class DiscoverFragment extends Fragment implements DiscoverContract.IView
         vLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         data=new ArrayList<>();
-        myAdapter = new MyAdapter(getActivity(),data);
-        recyclerView.setAdapter(myAdapter);
+        discoverAdapter = new DiscoverAdapter(getActivity(),data);
+        recyclerView.setAdapter(discoverAdapter);
 
         mPresenter.getrecommendData();
 
@@ -92,7 +92,7 @@ public class DiscoverFragment extends Fragment implements DiscoverContract.IView
     public void showRecommendData(List<Recommend> data) {
         this.data.clear();
         this.data.addAll(data);
-        myAdapter.notifyDataSetChanged();
+        discoverAdapter.notifyDataSetChanged();
 
         //为了更新数据
     }

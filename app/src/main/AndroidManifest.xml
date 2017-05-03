@@ -10,9 +10,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--主页-->
+
+        <!-- 主页 -->
         <activity
             android:name=".view.activity.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,24 +24,72 @@
             </intent-filter>
         </activity>
 
-        <!--启动页-->
+        <!-- 启动页 -->
         <activity
             android:name=".view.activity.StartActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <!--商品详情页-->
+        <!-- 注册页面 -->
+        <activity
+            android:name=".view.activity.RegisteredActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 注册登录选择页 -->
+        <activity
+            android:name=".view.activity.LoginOrLoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 手机验证码登录页面 -->
+        <activity
+            android:name=".view.activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 账号密码登录页面 -->
+        <activity
+            android:name=".view.activity.PasswordLoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 商品详情页 -->
         <activity
             android:name=".view.activity.DetailsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".view.activity.RegisteredActivity" />
-        <activity android:name=".view.activity.LoginOrLoginActivity" />
-        <activity android:name=".view.activity.LoginActivity" />
-        <activity android:name=".view.activity.PasswordLoginActivity" />
-        <activity android:name=".view.activity.OrderActivity" />
-        <activity android:name=".view.activity.ParticipationDetailsActivity" />
-        <activity android:name=".view.activity.SetPersonalInformationActivity" />
-        <activity android:name=".view.activity.PersonalInformationActivity" />
-        <activity android:name=".view.activity.WantActivity" />
-        <activity android:name=".view.activity.ParticipateListActivity"></activity>
+        <!-- 订单提交页 -->
+        <activity
+            android:name=".view.activity.OrderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 参与详情页面 -->
+        <activity
+            android:name=".view.activity.ParticipationDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 设置个人信息页面 -->
+        <activity
+            android:name=".view.activity.SetPersonalInformationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 个人信息详情页面 -->
+        <activity
+            android:name=".view.activity.PersonalInformationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 我想要的列表页 -->
+        <activity
+            android:name=".view.activity.WantActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 我参与的列表页 -->
+        <activity
+            android:name=".view.activity.ParticipateListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".view.activity.test1Activity" />
+        <activity android:name=".view.activity.test2Activity" />
+        <activity android:name=".view.activity.test3Activity" />
+        <activity android:name=".view.activity.test4Activity" />
+        <activity android:name=".view.activity.test5Activity" />
+        <activity android:name=".view.activity.test6Activity"></activity>
     </application>
 
 </manifest>

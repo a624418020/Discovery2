@@ -6,6 +6,7 @@
     <color name="red">#FE0D14</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="two_four_fives">#F5F5F5</color>
     <color name="three_three_three">#212121</color>
     <color name="gray_one_fives_three">#999999</color>
     <color name="gray_one_one_eight">#767676</color>
@@ -13,4 +14,5 @@
     <color name="textblack">#21242A</color>
     <color name="gray_twenty_one_six">#D8D8D8</color>
     <color name="black_overlay">#66000000</color>
+    <color name="splash_text_black">#21242a</color>
 </resources>

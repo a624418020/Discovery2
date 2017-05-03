@@ -6,7 +6,11 @@
     android:layout_height="match_parent"
     tools:context="milai.meishipintu.com.faxianlite.view.activity.WantActivity"
     android:background="#F5F5F5">
+    <include
+        android:id="@+id/titlebar_title"
+        layout="@layout/titlebar_title"/>
     <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/titlebar_title"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"

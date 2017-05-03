@@ -38,7 +38,6 @@ public class NetApi {
     }
 
     public Observable<List<Recommend>> getrecommend() {
-//        Log.i("返回的数据",netService.getRecommendHttp()+"");
         return netService.getRecommendHttp().map(new MyResultFunc<List<Recommend>>());
     }
 

@@ -19,7 +19,7 @@ import milai.meishipintu.com.faxianlite.Tool.ToastUtils;
 import milai.meishipintu.com.faxianlite.constract.ParticipateContract;
 import milai.meishipintu.com.faxianlite.model.beans.Order;
 import milai.meishipintu.com.faxianlite.presenter.ParticipatePresenter;
-import milai.meishipintu.com.faxianlite.view.adapter.ParticipateInvalidAdapter;
+import milai.meishipintu.com.faxianlite.view.adapter.ParticipateAdapter;
 
 /**
  * Created by Administrator on 2017/4/27 0027.
@@ -32,7 +32,7 @@ public class ParticipateFragment extends Fragment implements ParticipateContract
 
     private int type;                       //1-可用 2-不可用
     private ParticipateContract.IPresenter mPresenter;
-    private ParticipateInvalidAdapter adapter;
+    private ParticipateAdapter adapter;
     private List<Order> list;
 
     public ParticipateFragment() {
@@ -67,7 +67,7 @@ public class ParticipateFragment extends Fragment implements ParticipateContract
     }
     private void initdata(){
         list=new ArrayList<>();
-        adapter =new ParticipateInvalidAdapter(getActivity(),list);
+        adapter =new ParticipateAdapter(getActivity(),list);
         recyclerView.setLayoutManager( new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
         mPresenter.getData(type);
