@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import milai.meishipintu.com.faxianlite.DiscoverApplication;
 import milai.meishipintu.com.faxianlite.R;
+import milai.meishipintu.com.faxianlite.Tool.Immersive;
 import milai.meishipintu.com.faxianlite.view.adapter.MyFragmentAdapter;
 import milai.meishipintu.com.faxianlite.view.fargment.MineFragment;
 import milai.meishipintu.com.faxianlite.view.fargment.DiscoverFragment;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Immersive.immersive(0xff212121, this);
         setContentView(R.layout.activity_main);
         if (DiscoverApplication.getUser() == null) {
             //未登录

@@ -3,7 +3,6 @@ package milai.meishipintu.com.faxianlite.Tool;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MotionEventCompat;
-import android.support.v4.view.ViewConfigurationCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -34,83 +33,35 @@ public class BetterRecyclerView extends RecyclerView {
     }
 
 
-    @Override
-    public void setScrollingTouchSlop(int slopConstant) {
-        super.setScrollingTouchSlop(slopConstant);
-        final ViewConfiguration vc = ViewConfiguration.get(getContext());
-        switch (slopConstant) {
-            case TOUCH_SLOP_DEFAULT:
-                mTouchSlop = vc.getScaledTouchSlop();
-                break;
-            case TOUCH_SLOP_PAGING:
-                mTouchSlop = ViewConfigurationCompat.getScaledPagingTouchSlop(vc);
-                break;
-            default:
-                break;
-        }
-    }
-    //canScrollVertically()
-
 
     @Override
-    public boolean canScrollVertically(int direction) {
-        return super.canScrollVertically(direction);
-    }
+    public boolean onTouchEvent(MotionEvent e) {
+        Log.i("dy","触发滑动");
 
-    @Override
-    public boolean fling(int velocityX, int velocityY) {
-        velocityY *= 0.5;
-        return super.fling(0,velocityY);
-    }
-
-
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent e) {
-        final int action = MotionEventCompat.getActionMasked(e);
-        final int actionIndex = MotionEventCompat.getActionIndex(e);
-
-        switch (action) {
+        switch (e.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                mScrollPointerId = MotionEventCompat.getPointerId(e, 0);
-                mInitialTouchX = (int) (e.getX() + 0.5f);
-                mInitialTouchY = (int) (e.getY() + 0.5f);
-                return super.onInterceptTouchEvent(e);
-
-            case MotionEventCompat.ACTION_POINTER_DOWN:
-                mScrollPointerId = MotionEventCompat.getPointerId(e, actionIndex);
-                mInitialTouchX = (int) (MotionEventCompat.getX(e, actionIndex) + 0.5f);
-                mInitialTouchY = (int) (MotionEventCompat.getY(e, actionIndex) + 0.5f);
-                return super.onInterceptTouchEvent(e);
+                Log.i("down","触发down");
+                mInitialTouchY = (int) (e.getY() );
+                Log.i("mInitialTouchY",mInitialTouchY+"");
+                return super.onTouchEvent(e);
 
             case MotionEvent.ACTION_MOVE: {
-                final int index = MotionEventCompat.findPointerIndex(e, mScrollPointerId);
-                if (index < 0) {
-                    return false;
-                }
+                final int y = (int) (e.getY());
+                final int dy = y - mInitialTouchY;
+                Log.i("mInitialTouchY",mInitialTouchY+"");
+                Log.i("dy",dy+"");
+                scrollBy(0,dy);
+//                final boolean canScrollHorizontally = getLayoutManager().canScrollHorizontally();
+//                final boolean canScrollVertically = getLayoutManager().canScrollVertically();
+//                if (canScrollHorizontally && Math.abs(dx) > mTouchSlop && (Math.abs(dx) >= Math.abs(dy) || canScrollVertically)) {
+//                    Log.i("dy","滚");
+//                }
 
-                final int x = (int) (MotionEventCompat.getX(e, index) + 0.5f);
-                final int y = (int) (MotionEventCompat.getY(e, index) + 0.5f);
-                if (getScrollState() != SCROLL_STATE_DRAGGING) {
-                    final int dx = x - mInitialTouchX;
-                    final int dy = y - mInitialTouchY;
-                    Log.i("dy",dy+"");
-                    Log.i("dx",dx+"");
-                    final boolean canScrollHorizontally = getLayoutManager().canScrollHorizontally();
-                    final boolean canScrollVertically = getLayoutManager().canScrollVertically();
-                    boolean startScroll = false;
-                    if (canScrollHorizontally && Math.abs(dx) > mTouchSlop && (Math.abs(dx) >= Math.abs(dy) || canScrollVertically)) {
-                        startScroll = true;
-                    }
-                    if (canScrollVertically && Math.abs(dy) > mTouchSlop && (Math.abs(dy) >= Math.abs(dx) || canScrollHorizontally)) {
-                        startScroll = true;
-                    }
-                    return startScroll && super.onInterceptTouchEvent(e);
-                }
-                return super.onInterceptTouchEvent(e);
+                return super.onTouchEvent(e);
             }
 
             default:
-                return super.onInterceptTouchEvent(e);
+                return super.onTouchEvent(e);
         }
     }
 }

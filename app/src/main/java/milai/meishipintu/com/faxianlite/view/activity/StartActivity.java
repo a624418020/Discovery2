@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 
 import java.lang.ref.WeakReference;
 
@@ -19,6 +20,8 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN); // 隐藏状态栏
         setContentView(R.layout.activity_start);
         myHandler = new MyHandler(this);
         myHandler.sendEmptyMessageDelayed(0, 3000);

@@ -68,18 +68,19 @@ public class DiscoverFragment extends Fragment implements DiscoverContract.IView
 
         intent = new Intent();
         data = new ArrayList<>();
+        recyclerView.setLayoutManager(vLinearLayoutManager);
         discoverAdapter = new DiscoverAdapter(getActivity(), data);
         recyclerView.setAdapter(discoverAdapter);
         //获取最新5期信息
         mPresenter.getrecommendData("0");
 
-        scrollHelper.setUpRecycleView(recyclerView);
-        scrollHelper.setOnPageChangeListener(this);
-        recyclerView.setLayoutManager(vLinearLayoutManager);
-        recyclerView.removeItemDecoration(lastItemDecoration);
-        recyclerView.addItemDecoration(vDividerItemDecoration);
-        scrollHelper.updateLayoutManger();
-        lastItemDecoration = vDividerItemDecoration;
+//        scrollHelper.setUpRecycleView(recyclerView);
+//        scrollHelper.setOnPageChangeListener(this);
+//        recyclerView.setLayoutManager(vLinearLayoutManager);
+//        recyclerView.removeItemDecoration(lastItemDecoration);
+//        recyclerView.addItemDecoration(vDividerItemDecoration);
+//        scrollHelper.updateLayoutManger();
+//        lastItemDecoration = vDividerItemDecoration;
 
     }
 

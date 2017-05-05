@@ -103,7 +103,7 @@ public class RegisteredActivity extends AppCompatActivity implements RegisterCon
 
     //from RegisterContract.IView
     @Override
-    public void onRegisterSuccess(UserInfo userInfo) {
+    public void onRegisterSuccess() {
         Intent intent = new Intent(RegisteredActivity.this, MainActivity.class);
         intent.putExtra("type", Constant.REGISTER_SUCCESS);
         startActivity(intent);

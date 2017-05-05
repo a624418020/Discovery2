@@ -31,7 +31,8 @@
     <RelativeLayout
         android:id="@+id/bt_search"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="27dp"
+        android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
         android:background="@color/black"
         android:focusable="true"
@@ -54,7 +55,6 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:layout_marginRight="10dp"
-            android:background="@null"
             android:paddingLeft="5dp"
             android:text="搜索好物件"
             android:textColor="#88ffffff"/>

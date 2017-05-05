@@ -90,9 +90,9 @@ public class PagingScrollHelper {
             if (mOrientation == ORIENTATION.VERTICAL) {
                 startPoint = offsetY;
                 Log.i("velocityY",velocityY+"....."+velocityX+"");
-                if (velocityY < 160) {
+                if (velocityY < -500) {
                     p--;
-                } else if (velocityY > -160) {
+                } else if (velocityY > 500) {
                     p++;
                 }else {
 
@@ -164,6 +164,7 @@ public class PagingScrollHelper {
                 int vX = 0, vY = 0;
                 if (mOrientation == ORIENTATION.VERTICAL) {
                     int absY = Math.abs(offsetY - startY);
+                    Log.i("absY",absY+"");
                     //如果滑动的距离超过屏幕的一半表示需要滑动到下一页
                     move = absY > recyclerView.getHeight() / 2;
                     vY = 0;
