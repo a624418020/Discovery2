@@ -64,11 +64,6 @@
             android:name=".view.activity.ParticipationDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <!-- 设置个人信息页面 -->
-        <activity
-            android:name=".view.activity.SetPersonalInformationActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <!-- 个人信息详情页面 -->
         <activity
             android:name=".view.activity.PersonalInformationActivity"
@@ -84,12 +79,34 @@
             android:name=".view.activity.ParticipateListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".view.activity.test1Activity" />
-        <activity android:name=".view.activity.test2Activity" />
-        <activity android:name=".view.activity.test3Activity" />
-        <activity android:name=".view.activity.test4Activity" />
-        <activity android:name=".view.activity.test5Activity" />
-        <activity android:name=".view.activity.test6Activity"></activity>
+        <!-- 搜索页面 -->
+        <activity
+            android:name=".view.activity.SearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 选择城市列表 -->
+        <activity
+            android:name=".view.activity.SelectCityActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 设置页面 -->
+        <activity
+            android:name=".view.activity.SiteActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".view.activity.test4Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".view.activity.test5Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".view.activity.test6Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".view.activity.test7Activity"></activity>
     </application>
 
 </manifest>

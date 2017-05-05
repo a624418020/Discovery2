@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import milai.meishipintu.com.faxianlite.R;
 
+
 /**
  * Created by tangyangkai on 16/6/12.
  */
@@ -38,7 +39,8 @@ public class MyRecyclerView extends HorizontalScrollView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         if (!once) {
-            mTextView_Delete = (TextView) findViewById(R.id.tv_delete);
+            mTextView_Delete= (TextView) findViewById(R.id.tv_delete);
+    //        mTextView_Delete = (TextView) findViewById(R.id.tv_delete);
             once = true;
         }
     }
@@ -117,4 +119,5 @@ public class MyRecyclerView extends HorizontalScrollView {
 
         void onDownOrMove(MyRecyclerView myRecyclerView);
     }
+
 }

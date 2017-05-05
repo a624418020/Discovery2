@@ -11,6 +11,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
+import rx.functions.Func1;
 
 /**
  * Created by Administrator on 2017/3/22 0022.
@@ -39,9 +40,15 @@ public class NetApi {
         }
     }
 
-    //获取文章列表
-    public Observable<List<Recommend>> getrecommend() {
-        return netService.getRecommendHttp().map(new MyResultFunc<List<Recommend>>());
+    //获取首页内容列表
+    public Observable<List<Recommend>> getMainInfoList(String number) {
+        Observable<HttpResult<List<Recommend>>> observable;
+        if ("0".equals(number)) {
+            observable = netService.getMainInfoListHttp(null);
+        } else {
+            observable = netService.getMainInfoListHttp(number);
+        }
+        return observable.map(new MyResultFunc<List<Recommend>>());
     }
 
     //获取验证码

@@ -29,6 +29,7 @@
         </RelativeLayout>
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/bt_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginRight="10dp"
@@ -46,16 +47,17 @@
                 android:layout_centerInParent="true"
                 android:src="@drawable/icon_search"/>
         </RelativeLayout>
-        <EditText
+        <TextView
             android:id="@+id/et_search"
             android:layout_toRightOf="@id/rl_02"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:layout_marginRight="10dp"
             android:background="@null"
             android:paddingLeft="5dp"
-            android:hint="搜索好物件"
-            android:textColorHint="#88ffffff"/>
+            android:text="搜索好物件"
+            android:textColor="#88ffffff"/>
     </RelativeLayout>
 
 </RelativeLayout>

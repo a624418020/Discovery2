@@ -1,27 +1,33 @@
 package milai.meishipintu.com.faxianlite.model.beans;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 
 /**
  * Created by Administrator on 2017/3/27 0027.
  */
 
-public class Recommend implements Serializable {
-    private String date;
-    private String author;
+public class Recommend implements Serializable,Comparable<Recommend> {
+    private static final long serialVersionUID = 2L;          //序列化验证码
+
     private String id;
-    private String is_main;
-    private String is_show;
-    private String is_yc;
-    private String logo;
-    private String number;
-    private String orders;
-    private String read_count;
-    private String sub_name;
-    private String time;
     private String title;
-    private String type;
-    private String url;
+    private String logo;
+    private String type;                //显示类型
+    private String read_count;          //阅读数
+    private String sub_name;
+    private int orders;              //小图列表内排序
+    private String number;              //期号
+    private int is_main;             //是否头图
+    private String is_show;             //是否显示
+    private String is_yc;               //是否原创
+    private String author;
+    private String date;                //显示日期
+    private String dz;                  //点赞
+    private String activity_id;         //对应活动id
+    private String tips;
+    private String time;                //生成时间戳
 
     public String getDate() {
         return date;
@@ -47,11 +53,11 @@ public class Recommend implements Serializable {
         this.id = id;
     }
 
-    public String getIs_main() {
+    public int getIs_main() {
         return is_main;
     }
 
-    public void setIs_main(String is_main) {
+    public void setIs_main(int is_main) {
         this.is_main = is_main;
     }
 
@@ -87,11 +93,11 @@ public class Recommend implements Serializable {
         this.number = number;
     }
 
-    public String getOrders() {
+    public int getOrders() {
         return orders;
     }
 
-    public void setOrders(String orders) {
+    public void setOrders(int orders) {
         this.orders = orders;
     }
 
@@ -135,32 +141,53 @@ public class Recommend implements Serializable {
         this.type = type;
     }
 
-    public String getUrl() {
-        return url;
+    public String getDz() {
+        return dz;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setDz(String dz) {
+        this.dz = dz;
+    }
+
+    public String getActivity_id() {
+        return activity_id;
+    }
+
+    public void setActivity_id(String activity_id) {
+        this.activity_id = activity_id;
+    }
+
+    public String getTips() {
+        return tips;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
     }
 
     @Override
     public String toString() {
         return "Recommend{" +
-                "date='" + date + '\'' +
-                ", author='" + author + '\'' +
-                ", id='" + id + '\'' +
-                ", is_main='" + is_main + '\'' +
-                ", is_show='" + is_show + '\'' +
-                ", is_yc='" + is_yc + '\'' +
+                "title='" + title + '\'' +
                 ", logo='" + logo + '\'' +
-                ", number='" + number + '\'' +
-                ", orders='" + orders + '\'' +
                 ", read_count='" + read_count + '\'' +
                 ", sub_name='" + sub_name + '\'' +
-                ", time='" + time + '\'' +
-                ", title='" + title + '\'' +
-                ", type='" + type + '\'' +
-                ", url='" + url + '\'' +
+                ", orders='" + orders + '\'' +
+                ", number='" + number + '\'' +
+                ", is_main='" + is_main + '\'' +
+                ", is_yc='" + is_yc + '\'' +
+                ", author='" + author + '\'' +
+                ", date='" + date + '\'' +
+                ", dz='" + dz + '\'' +
+                ", activity_id='" + activity_id + '\'' +
                 '}';
+    }
+
+
+    //对象实现Comparable接口后即可通过Collection.sort()进行比较排序，
+    //实现该方法的返回值0代表相等，1表示大于，-1表示小于
+    @Override
+    public int compareTo(@NonNull Recommend o) {
+        return this.orders - o.getOrders();
     }
 }

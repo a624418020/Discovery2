@@ -17,10 +17,6 @@ import rx.Observable;
 
 public interface NetService {
 
-    //获取推举页面信息
-    @POST("/mspt/Applet/applet_news")
-    Observable<HttpResult<List<Recommend>>> getRecommendHttp();
-
     //获取验证码
     @FormUrlEncoded
     @POST("/Api/Api/getVerifyCodeByMobile")
@@ -37,4 +33,9 @@ public interface NetService {
     @POST("/Api/Api/login")
     Observable<HttpResult<UserInfo>> loginHttp(@Field("type") int type, @Field("tel") String tel
             , @Nullable @Field("verify") String vcode, @Nullable @Field("password") String password);
+
+    //获取首页内容
+    @FormUrlEncoded
+    @POST("/Api/Api/applet_news")
+    Observable<HttpResult<List<Recommend>>> getMainInfoListHttp(@Nullable @Field("number") String number);
 }

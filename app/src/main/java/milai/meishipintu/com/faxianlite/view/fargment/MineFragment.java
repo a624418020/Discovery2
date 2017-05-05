@@ -34,6 +34,7 @@ import milai.meishipintu.com.faxianlite.Tool.ToastUtils;
 import milai.meishipintu.com.faxianlite.constract.MineContract;
 import milai.meishipintu.com.faxianlite.presenter.MinePresenter;
 import milai.meishipintu.com.faxianlite.view.activity.ParticipateListActivity;
+import milai.meishipintu.com.faxianlite.view.activity.SiteActivity;
 import milai.meishipintu.com.faxianlite.view.activity.WantActivity;
 
 import static android.app.Activity.RESULT_OK;
@@ -150,7 +151,7 @@ public class MineFragment extends Fragment implements MineContract.IView {
         startActivityForResult(intent, CROP_SMALL_PICTURE);
     }
 
-    @OnClick({R.id.bt_order, R.id.bt_likes, R.id.bt_card, R.id.circleimageview})
+    @OnClick({R.id.bt_order, R.id.bt_likes, R.id.bt_card, R.id.circleimageview,R.id.bt_notice,R.id.bt_site})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_order:
@@ -167,6 +168,12 @@ public class MineFragment extends Fragment implements MineContract.IView {
                 break;
             case R.id.circleimageview:
                 showChoosePicDialog();
+                break;
+            case R.id.bt_notice:
+                break;
+            case R.id.bt_site:
+                intent.setClass(getActivity(), SiteActivity.class);
+                startActivity(intent);
                 break;
         }
     }

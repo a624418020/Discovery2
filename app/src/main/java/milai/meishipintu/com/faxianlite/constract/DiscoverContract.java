@@ -3,6 +3,7 @@ package milai.meishipintu.com.faxianlite.constract;
 import java.util.List;
 
 import milai.meishipintu.com.faxianlite.model.beans.Recommend;
+import milai.meishipintu.com.faxianlite.model.beans.RecommendPackage;
 import milai.meishipintu.com.faxianlite.presenter.BasicPresenter;
 import milai.meishipintu.com.faxianlite.view.BasicView;
 
@@ -15,10 +16,10 @@ import milai.meishipintu.com.faxianlite.view.BasicView;
 public interface DiscoverContract {
 
     interface IPresenter extends BasicPresenter{
-        void getrecommendData();
+        void getrecommendData(String number);
     }
 
     interface IView extends BasicView{
-        void showRecommendData(List<Recommend> data);
+        void showRecommendData(List<RecommendPackage> data);
     }
 }
