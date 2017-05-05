@@ -25,6 +25,6 @@ public interface LoginContract {
 
         void onVCodeGet(String VCode);
 
-        void onLoginSuccess(UserInfo userInfo);
+        void onLoginSuccess();
     }
 }

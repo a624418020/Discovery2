@@ -41,8 +41,9 @@ public class DetailsActivity extends AppCompatActivity implements DetailContract
         mPresenter=new DetailsPresenter(this);
         mPresenter.getActivityInfo(0);
         //发现页面跳转带过来的ID
-        Intent intent = getIntent();
-        id = intent.getStringExtra("id");
+//        Intent intent = getIntent();
+//        id = intent.getStringExtra("id");
+    //    Toast.makeText(getApplicationContext(), id+"跳转过来的参数", Toast.LENGTH_SHORT).show();
         mRollViewPager.setPlayDelay(2000);
         mRollViewPager.setAnimationDurtion(500);
         mRollViewPager.setAdapter(new TestNormalAdapter());

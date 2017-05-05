@@ -16,22 +16,14 @@ import milai.meishipintu.com.faxianlite.R;
  * 主要功能：
  */
 
-public class DiscoverViewHolder extends RecyclerView.ViewHolder {
+public class DiscoverSubtitleViewHolder extends RecyclerView.ViewHolder {
 
-    @BindView(R.id.iv_mainimaget)
-    ImageView ivMainimaget;
-    @BindView(R.id.rv_images)
-    RecyclerView rvimages;
-    @BindView(R.id.rl)
-    RelativeLayout rl;
-    @BindView(R.id.tv_title)
-    TextView title;
-    @BindView(R.id.designer)
-    TextView designer;
-    @BindView(R.id.name)
-    TextView name;
+    @BindView(R.id.iv_image)
+    ImageView ivimage;
+    @BindView(R.id.tv_subtitle)
+    TextView subtitle;
 
-    public DiscoverViewHolder(View itemView) {
+    public DiscoverSubtitleViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }

@@ -1,6 +1,5 @@
 package milai.meishipintu.com.faxianlite.constract;
 
-import milai.meishipintu.com.faxianlite.model.beans.UserInfo;
 import milai.meishipintu.com.faxianlite.presenter.BasicPresenter;
 import milai.meishipintu.com.faxianlite.view.BasicView;
 
@@ -10,21 +9,16 @@ import milai.meishipintu.com.faxianlite.view.BasicView;
  * 主要功能：
  */
 
-public interface RegisterContract {
+public interface PasswordLoginContract {
 
     interface IPresenter extends BasicPresenter{
 
-        void getVCode(String tel);
+        void login(String tel, String password);
 
-        void register(String tel, String vCode, String password);
-
-        void registerWeiChat();
     }
 
     interface IView extends BasicView{
 
-        void onVCodeGet(String VCode);
-
-        void onRegisterSuccess();
+        void onLoginSuccess();
     }
 }

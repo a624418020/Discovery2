@@ -1,6 +1,8 @@
 package milai.meishipintu.com.faxianlite.presenter;
 
+import milai.meishipintu.com.faxianlite.DiscoverApplication;
 import milai.meishipintu.com.faxianlite.constract.RegisterContract;
+import milai.meishipintu.com.faxianlite.model.PreferrenceHepler;
 import milai.meishipintu.com.faxianlite.model.Retrofit.NetApi;
 import milai.meishipintu.com.faxianlite.model.beans.UserInfo;
 import rx.Subscriber;
@@ -28,8 +30,9 @@ public class RegisterPresenter implements RegisterContract.IPresenter {
 
     @Override
     public void getVCode(String tel) {
-        subscriptions.add(netApi.getVerifyCode(tel).observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
+        subscriptions.add(netApi.getVerifyCode(tel)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<String>() {
                     @Override
                     public void onCompleted() {
@@ -49,8 +52,9 @@ public class RegisterPresenter implements RegisterContract.IPresenter {
 
     @Override
     public void register(String tel, String vCode, String password) {
-        subscriptions.add(netApi.register(tel,vCode,password).observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
+        subscriptions.add(netApi.register(tel,vCode,password)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<UserInfo>() {
                     @Override
                     public void onCompleted() {
@@ -63,7 +67,10 @@ public class RegisterPresenter implements RegisterContract.IPresenter {
 
                     @Override
                     public void onNext(UserInfo userInfo) {
-                        iView.onRegisterSuccess(userInfo);
+                        //保存用户数据
+                        PreferrenceHepler.saveUser(userInfo);
+                        DiscoverApplication.setUser(userInfo);
+                        iView.onRegisterSuccess();
                     }
                 }));
     }

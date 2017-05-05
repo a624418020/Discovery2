@@ -20,7 +20,6 @@ import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.Tool.DividerItemDecoration;
 import milai.meishipintu.com.faxianlite.Tool.PagingScrollHelper;
 import milai.meishipintu.com.faxianlite.constract.DiscoverContract;
-import milai.meishipintu.com.faxianlite.model.beans.Recommend;
 import milai.meishipintu.com.faxianlite.model.beans.RecommendPackage;
 import milai.meishipintu.com.faxianlite.presenter.DiscoverPresenter;
 import milai.meishipintu.com.faxianlite.view.activity.SearchActivity;
@@ -39,7 +38,7 @@ public class DiscoverFragment extends Fragment implements DiscoverContract.IView
     private DividerItemDecoration vDividerItemDecoration = null;
     private LinearLayoutManager vLinearLayoutManager = null;
     private RecyclerView.ItemDecoration lastItemDecoration = null;
-    private List<Recommend> data;
+    private List<RecommendPackage> data;
 
     //返回fragment自己
     public static DiscoverFragment newInstance() {
@@ -96,7 +95,8 @@ public class DiscoverFragment extends Fragment implements DiscoverContract.IView
 
     @Override
     public void showRecommendData(List<RecommendPackage> data) {
-
+        this.data.addAll(data);
+        discoverAdapter.notifyDataSetChanged();
 
     }
 

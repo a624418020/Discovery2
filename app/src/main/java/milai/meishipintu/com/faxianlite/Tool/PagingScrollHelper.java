@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -48,12 +49,12 @@ public class PagingScrollHelper {
     }
 
     public void updateLayoutManger() {
-        RecyclerView.LayoutManager layoutManager = mRecyclerView.getLayoutManager();
+        BetterRecyclerView.LayoutManager layoutManager = mRecyclerView.getLayoutManager();
         if (layoutManager != null) {
             if (layoutManager.canScrollVertically()) {
                 mOrientation = ORIENTATION.VERTICAL;
             } else if (layoutManager.canScrollHorizontally()) {
-                mOrientation = ORIENTATION.HORIZONTAL;
+                mOrientation = ORIENTATION.NULL;
             } else {
                 mOrientation = ORIENTATION.NULL;
             }
@@ -71,7 +72,7 @@ public class PagingScrollHelper {
 
     ValueAnimator mAnimator = null;
 
-    public class MyOnFlingListener extends RecyclerView.OnFlingListener {
+    public class MyOnFlingListener extends BetterRecyclerView.OnFlingListener {
 
         @Override
         public boolean onFling(int velocityX, int velocityY) {
@@ -88,24 +89,26 @@ public class PagingScrollHelper {
             //如果是垂直方向
             if (mOrientation == ORIENTATION.VERTICAL) {
                 startPoint = offsetY;
-
-                if (velocityY < 0) {
+                Log.i("velocityY",velocityY+"....."+velocityX+"");
+                if (velocityY < 160) {
                     p--;
-                } else if (velocityY > 0) {
+                } else if (velocityY > -160) {
                     p++;
+                }else {
+
                 }
                 //更具不同的速度判断需要滚动的方向
                 //注意，此处有一个技巧，就是当速度为0的时候就滚动会开始的页面，即实现页面复位
                 endPoint = p * mRecyclerView.getHeight();
 
             } else {
-                startPoint = offsetX;
-                if (velocityX < 0) {
-                    p--;
-                } else if (velocityX > 0) {
-                    p++;
-                }
-                endPoint = p * mRecyclerView.getWidth();
+//                startPoint = offsetX;
+//                if (velocityX < 0) {
+//                    p--;
+//                } else if (velocityX > 0) {
+//                    p++;
+//                }
+//                endPoint = p * mRecyclerView.getWidth();
 
             }
             if (endPoint < 0) {

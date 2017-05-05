@@ -131,7 +131,7 @@
                 android:layout_marginBottom="14.3dp"
                 android:src="@drawable/icon_wechat"/>
             <TextView
-                android:layout_below="@id/iv_04"
+                android:layout_below="@id/iv_weichat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"

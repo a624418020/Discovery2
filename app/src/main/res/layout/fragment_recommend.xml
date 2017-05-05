@@ -7,12 +7,14 @@
         <include
             android:id="@+id/titlebar_search"
             layout="@layout/titlebar_search"/>
-        <android.support.v7.widget.RecyclerView
+        <milai.meishipintu.com.faxianlite.Tool.BetterRecyclerView
             android:layout_below="@id/titlebar_search"
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        </android.support.v7.widget.RecyclerView>
+
+        </milai.meishipintu.com.faxianlite.Tool.BetterRecyclerView>
+
     </RelativeLayout>
 
 

@@ -62,7 +62,11 @@ public class NetApi {
     }
 
     //登录
+    //type = 1 验证码登录， type=2 密码登录  type=3 微信登录
     public Observable<UserInfo> login(int type, String tel, @Nullable String vcode, @Nullable String password) {
         return netService.loginHttp(type, tel, vcode, password).map(new MyResultFunc<UserInfo>());
     }
+
+    //修改密码
+
 }

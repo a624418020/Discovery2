@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import java.lang.ref.WeakReference;
 
+import milai.meishipintu.com.faxianlite.DiscoverApplication;
 import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.model.PreferrenceHepler;
 
@@ -37,11 +38,7 @@ public class StartActivity extends AppCompatActivity {
             if (msg.what == 0) {
                 StartActivity activity = reference.get();
                 if (activity != null) {
-                    if (PreferrenceHepler.getUid()!= null) {
-                        activity.startActivity(new Intent(activity, MainActivity.class));
-                    } else {
-                        activity.startActivity(new Intent(activity, MainActivity.class));
-                    }
+                    activity.startActivity(new Intent(activity, MainActivity.class));
                     activity.finish();
                 }
             }

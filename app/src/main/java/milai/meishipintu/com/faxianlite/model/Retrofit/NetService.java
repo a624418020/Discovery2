@@ -38,4 +38,7 @@ public interface NetService {
     @FormUrlEncoded
     @POST("/Api/Api/applet_news")
     Observable<HttpResult<List<Recommend>>> getMainInfoListHttp(@Nullable @Field("number") String number);
+
+    //修改密码
+
 }

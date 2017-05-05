@@ -25,18 +25,13 @@ public class LoginOrLoginActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_register:
-                startActivityForResult(new Intent(LoginOrLoginActivity.this, RegisteredActivity.class), Constant.REGISTER);
+                startActivity(new Intent(LoginOrLoginActivity.this, RegisteredActivity.class));
                 this.finish();
                 break;
             case R.id.bt_login:
-                startActivityForResult(new Intent(LoginOrLoginActivity.this, LoginActivity.class),Constant.LOGIN);
+                startActivity(new Intent(LoginOrLoginActivity.this, LoginActivity.class));
                 this.finish();
                 break;
         }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
     }
 }
