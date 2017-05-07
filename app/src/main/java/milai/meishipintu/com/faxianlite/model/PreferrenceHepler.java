@@ -100,4 +100,10 @@ public class PreferrenceHepler {
         return userInfo;
     }
 
+    public static void clearUserInfo() {
+        SharedPreferences.Editor editor = getSharePreference().edit();
+        editor.remove("user");
+        editor.apply();
+    }
+
 }

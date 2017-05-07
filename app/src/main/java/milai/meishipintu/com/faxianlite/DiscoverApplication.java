@@ -10,7 +10,7 @@ import milai.meishipintu.com.faxianlite.model.beans.UserInfo;
 /**
  * Created by Administrator on 2017/5/2.
  * <p>
- * 主要功能：全局类
+ * 主要功能：app全局类
  */
 
 public class DiscoverApplication extends Application {

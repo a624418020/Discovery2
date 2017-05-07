@@ -4,12 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageView;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import milai.meishipintu.com.faxianlite.Constant;
 import milai.meishipintu.com.faxianlite.R;
 
 public class LoginOrLoginActivity extends AppCompatActivity {
@@ -33,5 +30,10 @@ public class LoginOrLoginActivity extends AppCompatActivity {
                 this.finish();
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //不允许返回
     }
 }

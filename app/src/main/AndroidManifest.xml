@@ -93,7 +93,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <!-- 设置页面 -->
         <activity
-            android:name=".view.activity.SiteActivity"
+            android:name=".view.activity.SettingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity

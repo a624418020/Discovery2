@@ -34,16 +34,16 @@ import milai.meishipintu.com.faxianlite.Tool.ToastUtils;
 import milai.meishipintu.com.faxianlite.constract.MineContract;
 import milai.meishipintu.com.faxianlite.presenter.MinePresenter;
 import milai.meishipintu.com.faxianlite.view.activity.ParticipateListActivity;
-import milai.meishipintu.com.faxianlite.view.activity.SiteActivity;
+import milai.meishipintu.com.faxianlite.view.activity.SettingActivity;
 import milai.meishipintu.com.faxianlite.view.activity.WantActivity;
 
 import static android.app.Activity.RESULT_OK;
+import static milai.meishipintu.com.faxianlite.Constant.CHOOSE_PICTURE;
+import static milai.meishipintu.com.faxianlite.Constant.CROP_SMALL_PICTURE;
+import static milai.meishipintu.com.faxianlite.Constant.TAKE_PICTURE;
 
 
-public class MineFragment extends Fragment implements MineContract.IView {
-    protected static final int CHOOSE_PICTURE = 0;
-    protected static final int TAKE_PICTURE = 1;
-    private static final int CROP_SMALL_PICTURE = 2;
+public class MineFragment extends Fragment implements MineContract.IView{
 
 
     @BindView(R.id.gv_lattice)
@@ -53,7 +53,6 @@ public class MineFragment extends Fragment implements MineContract.IView {
 
     private SimpleAdapter sim_adapter;
 
-    private Intent intent;
     protected static Uri tempUri;
     private MinePresenter minePresenter;
     private List<Map<String, Object>> data_list;
@@ -69,7 +68,6 @@ public class MineFragment extends Fragment implements MineContract.IView {
     private void initData() {
         minePresenter = new MinePresenter(this);
         minePresenter.getGridData();
-        intent = new Intent();
     }
 
 
@@ -151,18 +149,15 @@ public class MineFragment extends Fragment implements MineContract.IView {
         startActivityForResult(intent, CROP_SMALL_PICTURE);
     }
 
-    @OnClick({R.id.bt_order, R.id.bt_likes, R.id.bt_card, R.id.circleimageview,R.id.bt_notice,R.id.bt_site})
+    @OnClick({R.id.bt_order, R.id.bt_likes, R.id.bt_card, R.id.circleimageview, R.id.bt_notice, R.id.bt_setting})
     public void onClick(View view) {
+        Intent intent = null;
         switch (view.getId()) {
             case R.id.bt_order:
-//                intent.putExtra();
-                intent.setClass(getActivity(), ParticipateListActivity.class);
-                startActivity(intent);
+                intent = new Intent(getActivity(), ParticipateListActivity.class);
                 break;
             case R.id.bt_likes:
-                // intent.putExtra();
-                intent.setClass(getActivity(), WantActivity.class);
-                startActivity(intent);
+                intent = new Intent(getActivity(), WantActivity.class);
                 break;
             case R.id.bt_card:
                 break;
@@ -172,9 +167,11 @@ public class MineFragment extends Fragment implements MineContract.IView {
             case R.id.bt_notice:
                 break;
             case R.id.bt_site:
-                intent.setClass(getActivity(), SiteActivity.class);
-                startActivity(intent);
+                intent = new Intent(getActivity(), SettingActivity.class);
                 break;
+        }
+        if (intent != null) {
+            startActivity(intent);
         }
     }
 

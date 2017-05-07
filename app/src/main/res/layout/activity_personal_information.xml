@@ -7,9 +7,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="milai.meishipintu.com.faxianlite.view.activity.PersonalInformationActivity">
+
     <include
-        android:id="@+id/titlebar_title"
         layout="@layout/titlebar_title"/>
+
     <RelativeLayout
         android:id="@+id/rl_01"
         android:layout_width="match_parent"
@@ -19,6 +20,7 @@
         android:background="#F5F5F5"
         android:layout_marginBottom="21dp"
         android:layout_below="@id/roll_view_pager">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,7 +45,9 @@
                 android:text="点击头像更换图片"/>
         </RelativeLayout>
     </RelativeLayout>
+
     <RelativeLayout
+        android:id="@+id/rl_nick_name"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:paddingLeft="17dp"
@@ -56,6 +60,7 @@
             android:layout_centerVertical="true"
             android:text="昵称"/>
         <TextView
+            android:id="@+id/tv_nick_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -71,13 +76,16 @@
             android:layout_alignParentRight="true"
             android:src="@drawable/icon_next"/>
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="19dp"
         android:layout_marginRight="17dp"
         android:background="#F5F5F5"/>
+
     <RelativeLayout
+        android:id="@+id/rl_sex"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:paddingLeft="17dp"
@@ -90,6 +98,7 @@
             android:layout_centerVertical="true"
             android:text="性别"/>
         <TextView
+            android:id="@+id/tv_sex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -105,11 +114,14 @@
             android:layout_alignParentRight="true"
             android:src="@drawable/icon_next"/>
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="#F5F5F5"/>
+
     <RelativeLayout
+        android:id="@+id/rl_tel"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:paddingLeft="17dp"
@@ -122,6 +134,7 @@
             android:layout_centerVertical="true"
             android:text="手机号"/>
         <TextView
+            android:id="@+id/tv_tel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -137,13 +150,16 @@
             android:layout_alignParentRight="true"
             android:src="@drawable/icon_next"/>
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="19dp"
         android:layout_marginRight="17dp"
         android:background="#F5F5F5"/>
+
     <RelativeLayout
+        android:id="@+id/rl_pass"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:paddingLeft="17dp"
@@ -154,7 +170,7 @@
             android:textSize="14sp"
             android:textColor="@color/textblack"
             android:layout_centerVertical="true"
-            android:text="13888888888"/>
+            android:text="设置密码"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

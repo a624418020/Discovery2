@@ -1,31 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="40dp">
-    <RelativeLayout
+    android:layout_height="40dp"
+    android:background="@color/three_three_three">
+
+    <ImageView
         android:id="@+id/bt_notice"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:src="@drawable/icon_news"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/bt_site"
-        android:layout_width="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="16dp"
+        android:paddingRight="20dp"
+        android:src="@drawable/icon_news"/>
+
+    <ImageView
+        android:id="@+id/bt_setting"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/icon_setting"/>
-    </RelativeLayout>
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="20dp"
+        android:paddingRight="16dp"
+        android:src="@drawable/icon_setting"/>
 
 </RelativeLayout>

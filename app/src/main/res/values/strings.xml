@@ -8,4 +8,5 @@
     <string name="err_tel">请输入正确的手机号码</string>
     <string name="err_input">输入项不能为空</string>
     <string name="err_vcode">您输入的验证码不正确</string>
+    <string name="personal_info">个人资料</string>
 </resources>

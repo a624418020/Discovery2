@@ -12,11 +12,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import milai.meishipintu.com.faxianlite.Constant;
 import milai.meishipintu.com.faxianlite.R;
-import milai.meishipintu.com.faxianlite.Tool.Encoder;
 import milai.meishipintu.com.faxianlite.Tool.StringUtils;
 import milai.meishipintu.com.faxianlite.Tool.ToastUtils;
 import milai.meishipintu.com.faxianlite.constract.LoginContract;
-import milai.meishipintu.com.faxianlite.model.beans.UserInfo;
 import milai.meishipintu.com.faxianlite.presenter.LoginPresenter;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.IView {
@@ -57,6 +55,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.IV
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra("type", Constant.LOGIN_SUCCESS);
         startActivity(intent);
+        this.finish();
     }
 
 

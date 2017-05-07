@@ -66,6 +66,7 @@ public class PasswordLoginActivity extends AppCompatActivity implements Password
         Intent intent = new Intent(PasswordLoginActivity.this, MainActivity.class);
         intent.putExtra("type", Constant.LOGIN_SUCCESS);
         startActivity(intent);
+        this.finish();
     }
 
     @Override

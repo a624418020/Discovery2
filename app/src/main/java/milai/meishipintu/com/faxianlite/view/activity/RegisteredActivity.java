@@ -18,7 +18,6 @@ import milai.meishipintu.com.faxianlite.Tool.Encoder;
 import milai.meishipintu.com.faxianlite.Tool.StringUtils;
 import milai.meishipintu.com.faxianlite.Tool.ToastUtils;
 import milai.meishipintu.com.faxianlite.constract.RegisterContract;
-import milai.meishipintu.com.faxianlite.model.beans.UserInfo;
 import milai.meishipintu.com.faxianlite.presenter.RegisterPresenter;
 
 public class RegisteredActivity extends AppCompatActivity implements RegisterContract.IView{
@@ -107,6 +106,7 @@ public class RegisteredActivity extends AppCompatActivity implements RegisterCon
         Intent intent = new Intent(RegisteredActivity.this, MainActivity.class);
         intent.putExtra("type", Constant.REGISTER_SUCCESS);
         startActivity(intent);
+        this.finish();
     }
 
 

@@ -9,6 +9,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import milai.meishipintu.com.faxianlite.Constant;
 import milai.meishipintu.com.faxianlite.DiscoverApplication;
 import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.Tool.Immersive;
@@ -44,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         Log.d(TAG, "intent:" + intent.getIntExtra("type", -1));
+        if (intent.getIntExtra("type", -1) == Constant.LOGOUT_SUCCESS) {
+            startActivity(new Intent(MainActivity.this, LoginOrLoginActivity.class));
+        }
     }
 }
 
