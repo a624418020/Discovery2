@@ -41,5 +41,12 @@ public interface NetService {
 
     //修改密码
 
+    //修改昵称/性别
+    @FormUrlEncoded
+    @POST("Api/Api/updateUserInfo")
+    Observable<HttpResult<UserInfo>> updateUserInfoHttp(@Field("uid") String uid, @Nullable @Field("name") String name
+            , @Nullable @Field("sex") Integer sex);
+
+    //
 
 }

@@ -56,6 +56,7 @@
             android:name=".view.activity.DetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!--android:process="DetailsActivity.web"-->
         <!-- 订单提交页 -->
         <activity
             android:name=".view.activity.OrderActivity"
@@ -97,18 +98,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".view.activity.test4Activity"
+            android:name=".view.activity.SetnameActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".view.activity.test5Activity"
+            android:name=".view.activity.SexActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".view.activity.test6Activity"
+            android:name=".view.activity.SetpasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".view.activity.test7Activity"></activity>
+        <activity android:name=".view.activity.ModifyPhoneActivity"></activity>
     </application>
 
 </manifest>

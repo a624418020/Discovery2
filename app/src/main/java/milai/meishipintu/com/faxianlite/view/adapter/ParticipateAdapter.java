@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 
 import java.util.List;
 
@@ -21,7 +23,7 @@ import milai.meishipintu.com.faxianlite.model.beans.Order;
 public class ParticipateAdapter extends RecyclerView.Adapter<ParticipateViewHolder> implements View.OnClickListener  {
     private Context context;
     private List<Order> list;
-    private Picasso picasso;
+    private RequestManager manager;
     private int position;
 
     //自定义监听事件
@@ -38,7 +40,7 @@ public class ParticipateAdapter extends RecyclerView.Adapter<ParticipateViewHold
     public ParticipateAdapter(Context context, List<Order> list) {
         this.context = context;
         this.list = list;
-        picasso = Picasso.with(context);
+        manager = Glide.with(context);
 
     }
     @Override
@@ -54,7 +56,7 @@ public class ParticipateAdapter extends RecyclerView.Adapter<ParticipateViewHold
         this.position=position;
         final Order order=list.get(position);
         holder.btCollection.setVisibility(View.GONE);
-        picasso.load(order.getCommodity_image()).into(holder.commodityImage);//加载网络图片
+        manager.load(order.getCommodity_image()).into(holder.commodityImage);//加载网络图片
         holder.tvTitle.setText(order.getCommodity_title());
         holder.tvSubtitle.setText(order.getCommodity_subtitle());
         holder.tvMoney.setText(order.getCommodity_value());

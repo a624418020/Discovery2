@@ -2,6 +2,7 @@ package milai.meishipintu.com.faxianlite.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,12 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import milai.meishipintu.com.faxianlite.R;
+import milai.meishipintu.com.faxianlite.Tool.BetterRecyclerView;
 import milai.meishipintu.com.faxianlite.model.beans.Recommend;
 import milai.meishipintu.com.faxianlite.model.beans.RecommendPackage;
 import milai.meishipintu.com.faxianlite.view.activity.DetailsActivity;
 
 
-public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverViewHolder> {
+public class DiscoverAdapter extends BetterRecyclerView.Adapter<DiscoverViewHolder> {
 
     private List<RecommendPackage> data = new ArrayList<>();
 
@@ -59,15 +61,14 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverViewHolder> {
         Log.i("aa",headRecommend.getLogo());
         holder.itemView.setTag(headRecommend.getId());
         holder.title.setText(headRecommend.getTitle());
-        holder.ivMainimaget.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                //Intent传递参数
-                intent.putExtra("id", position);
-                intent.setClass(context, DetailsActivity.class);
+                Intent intent = new Intent(context, DetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Recommend",  headRecommend);
+                intent.putExtras(bundle);
                 context.startActivity(intent);
-
             }
         });
     }

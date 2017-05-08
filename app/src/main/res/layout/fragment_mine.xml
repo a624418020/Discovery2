@@ -21,7 +21,7 @@
                  android:layout_width="75dp"
                  android:layout_height="75dp"
                  android:layout_centerHorizontal="true"
-                 android:src="@drawable/ic_launcher"
+                 android:src="@drawable/icon_avantar"
                  app:border_color="#000000"
                  app:border_width="1dp" />
             <TextView

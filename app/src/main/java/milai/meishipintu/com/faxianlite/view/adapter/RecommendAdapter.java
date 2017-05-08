@@ -6,7 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.squareup.picasso.Picasso;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+
 import java.util.List;
 import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.model.beans.Recommend;
@@ -19,7 +22,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendViewHolder> 
 
     private List<Recommend> data;
     private Context context;
-    private Picasso picasso;
+    private RequestManager manager;
 
     //自定义监听事件
     public static interface OnRecyclerViewItemClickListener {
@@ -35,7 +38,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendViewHolder> 
     public RecommendAdapter(Context context, List<Recommend> list) {
         this.data = list;
         this.context = context;
-        picasso = Picasso.with(context);
+        manager = Glide.with(context);
     }
 
     @Override
@@ -50,7 +53,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendViewHolder> 
     public void onBindViewHolder(RecommendViewHolder holder, int position) {
         Log.i("data1",data.size()+"");
         final Recommend recommend=data.get(position);
-        picasso.load(recommend.getLogo()).into(holder.ivMainimaget);//加载网络图片
+        manager.load(recommend.getLogo()).into(holder.ivMainimaget);//加载网络图片
         holder.itemView.setTag(recommend.getId());
         holder.title.setText(data.get(position).getTitle());
     }

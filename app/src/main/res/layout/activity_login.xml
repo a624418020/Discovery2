@@ -37,11 +37,12 @@
             <TextView
                 android:id="@+id/bt_verify"
                 android:layout_width="86dp"
-                android:layout_height="26dp"
-                android:background="@drawable/shape_corner_black"
+                android:layout_height="28dp"
+                android:background="@drawable/selector_bt_border"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="@color/textblack"
+                android:textSize="12sp"
+                android:textColor="@drawable/selector_text_bt"
                 android:text="获取验证码"/>
     </LinearLayout>
     <View
@@ -75,7 +76,8 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
-        android:background="@color/gray_one_fives_three"
+        android:enabled="false"
+        android:background="@drawable/selector_bt_background"
         android:layout_centerInParent="true"
         android:gravity="center"
         android:textSize="14dp"

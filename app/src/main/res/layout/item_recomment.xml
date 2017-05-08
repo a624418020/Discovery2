@@ -22,12 +22,13 @@
             android:background="@drawable/shape_white_radius12"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
             android:layout_marginBottom="30dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="了解看看"/>
         </RelativeLayout>
         <TextView
@@ -35,46 +36,49 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@id/rl"
+            android:textColor="@color/white"
             android:text="日本设计师井上保美的着衣之道"
             android:layout_marginBottom="22dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
             android:textSize="22sp"/>
         <View
             android:id="@+id/view01"
             android:layout_above="@id/tv_title"
-            android:layout_width="80dp"
+            android:layout_width="29dp"
             android:layout_height="3dp"
             android:background="@color/white"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
             android:layout_marginBottom="22dp"/>
         <TextView
             android:id="@+id/designer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:layout_above="@id/view01"
             android:text="设计师"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
             android:layout_marginBottom="22dp"/>
         <View
             android:id="@+id/view02"
             android:layout_above="@id/designer"
-            android:layout_width="80dp"
+            android:layout_width="58dp"
             android:layout_height="1dp"
             android:background="@color/white"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
             android:layout_marginBottom="4dp"/>
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@id/view02"
+            android:textColor="@color/white"
             android:text="井上保美"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
             android:layout_marginBottom="4dp"/>
     </RelativeLayout>
     <RelativeLayout

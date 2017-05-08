@@ -8,7 +8,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +53,7 @@ public class OrderActivity extends AppCompatActivity implements OrderContract.IV
 
     private List<Order> list;
     private List<Order> data;
-    private Picasso picasso;
+    private RequestManager manager;
     private String time;
     private OrderContract.IPresenter orderPresenter;
     private Order order;
@@ -67,7 +68,7 @@ public class OrderActivity extends AppCompatActivity implements OrderContract.IV
         list=new ArrayList<>();
         list.addAll((List<Order>)getIntent().getSerializableExtra("list"));
         order=list.get(0);
-        picasso = Picasso.with(this);
+        manager = Glide.with(this);
         orderPresenter = new OrderPresenter(this);
         settext(order);
     }
@@ -76,7 +77,7 @@ public class OrderActivity extends AppCompatActivity implements OrderContract.IV
         tvPeopleName.setText(order.getPeople_name());
         tvPeoplePhone.setText(order.getPeople_phone());
         tvPeopleAddress.setText(order.getPeople_address());
-        picasso.load(order.getCommodity_image()).into(ivCommodityImage);//加载网络图片
+        manager.load(order.getCommodity_image()).into(ivCommodityImage);//加载网络图片
         tvCommodityTitle.setText(order.getCommodity_title());
         tvCommoditySubtitle.setText(order.getCommodity_subtitle());
         tvCommodityValue.setText(order.getCommodity_value());//价值

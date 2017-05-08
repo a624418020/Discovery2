@@ -1,96 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <include
+        android:id="@+id/titlebar_title"
+        layout="@layout/titlebar_title"/>
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <com.jude.rollviewpager.RollPagerView
-                android:id="@+id/roll_view_pager"
-                android:layout_width="match_parent"
-                android:layout_height="283dp"
-                app:rollviewpager_play_delay="3000"/>
+        android:layout_below="@id/titlebar_title"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
             <RelativeLayout
                 android:id="@+id/rl_01"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="19dp"
-                android:paddingRight="18dp"
-                android:background="#F5F5F5"
-                android:layout_marginBottom="21dp"
-                android:layout_below="@id/roll_view_pager">
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:id="@+id/tv_title0"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white">
-                    <milai.meishipintu.com.faxianlite.Tool.CircleImageView
-                        android:id="@+id/circleimageview"
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/ic_launcher"
-                        android:layout_marginTop="-23dp"
-                        app:border_color="#000000"
-                        app:border_width="1dp" />
+                    android:textColor="@color/textblack"
+                    android:textSize="20sp"/>
+                <LinearLayout
+                    android:layout_below="@id/tv_title0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#a9a9a9"
+                        android:paddingLeft="10dp"
+                        android:textSize="14sp"/>
+                    <TextView
+                        android:id="@+id/tv_yc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginLeft="11dp"
+                        android:textColor="#a9a9a9"
+                        android:textSize="14sp"/>
                     <TextView
                         android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/circleimageview"
-                        android:layout_centerHorizontal="true"
-                        android:textColor="#21242A"
-                        android:textSize="13sp"
-                        android:text="井上保美"/>
-                    <TextView
-                        android:id="@+id/tv_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_below="@id/tv_name"
-                        android:textSize="12sp"
-                        android:textColor="#B2B2B2"
-                        android:text="井上保美"/>
-                    <TextView
-                        android:id="@+id/tv_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_label"
-                        android:layout_centerHorizontal="true"
-                        android:textSize="22sp"
-                        android:textColor="#21242A"
-                        android:text="日本设计师井上保美的衣着之道"/>
-                </RelativeLayout>
+                        android:textColor="#a9a9a9"
+                        android:paddingLeft="10dp"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
             </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="wrap_content"
+            <milai.meishipintu.com.faxianlite.Tool.ObservableWebView
+                android:id="@+id/wv_article"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/rl_01"
-                android:background="@color/white"
-                android:paddingLeft="18dp"
-                android:paddingRight="18dp">
-                <TextView
-                    android:id="@+id/profiles"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textColor="#21242A"
-                    android:text="人物介绍"
-                    android:layout_marginTop="21dp"
-                    android:layout_marginBottom="12dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/profiles"
-                    android:text="啊啊奥斯卡来得及看蓝色都好啊我吾问无为谓无无无无无bbbbbbbbb按时发大水发送范围
-                    审犯人阿发无人"/>
-            </RelativeLayout>
-        </RelativeLayout>
+                android:paddingLeft="8dp"
+                android:layout_marginRight="8dp">
+            </milai.meishipintu.com.faxianlite.Tool.ObservableWebView>
+        </LinearLayout>
     </ScrollView>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"

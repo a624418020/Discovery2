@@ -166,8 +166,9 @@ public class MineFragment extends Fragment implements MineContract.IView{
                 break;
             case R.id.bt_notice:
                 break;
-            case R.id.bt_site:
+            case R.id.bt_setting:
                 intent = new Intent(getActivity(), SettingActivity.class);
+
                 break;
         }
         if (intent != null) {

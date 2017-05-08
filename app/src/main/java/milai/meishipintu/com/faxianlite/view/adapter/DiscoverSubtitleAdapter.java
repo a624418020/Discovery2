@@ -2,15 +2,15 @@ package milai.meishipintu.com.faxianlite.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.RequestManager;
 
 import java.util.List;
 
@@ -25,12 +25,12 @@ import milai.meishipintu.com.faxianlite.view.activity.DetailsActivity;
 public class DiscoverSubtitleAdapter extends RecyclerView.Adapter< DiscoverSubtitleViewHolder> implements View.OnClickListener  {
     private Context context;
     private List<Recommend> list;
-    private Picasso picasso;
+    private RequestManager manager;
     private int position;
 
     //自定义监听事件
     public static interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view, String id);
+        void onItemClick(View view, int id);
     }
 
     private DiscoverSubtitleAdapter.OnRecyclerViewItemClickListener mOnItemClickListener = null;
@@ -42,7 +42,7 @@ public class DiscoverSubtitleAdapter extends RecyclerView.Adapter< DiscoverSubti
     public DiscoverSubtitleAdapter(Context context,List<Recommend> list) {
         this.context = context;
         this.list = list;
-        picasso = Picasso.with(context);
+        manager = Glide.with(context);
 
     }
     @Override
@@ -59,18 +59,16 @@ public class DiscoverSubtitleAdapter extends RecyclerView.Adapter< DiscoverSubti
         final Recommend recommend = list.get(position);
         Glide.with(context).
                 load(recommend.getLogo()).
-                asBitmap(). //强制处理为bitmap
                 into(holder.ivimage);//显示到目标View中
         Log.i("image",recommend.getLogo());
         holder.subtitle.setText(recommend.getTitle());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                //Intent传递参数
-                intent.putExtra("id", position);
-                intent.setClass(context, DetailsActivity.class);
-                Toast.makeText(context, position+"", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, DetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Recommend", recommend);
+                intent.putExtras(bundle);
                 context.startActivity(intent);
             }
         });
@@ -84,7 +82,7 @@ public class DiscoverSubtitleAdapter extends RecyclerView.Adapter< DiscoverSubti
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(context,  position+"", Toast.LENGTH_SHORT).show();
+        mOnItemClickListener.onItemClick(view,position);
     }
 
 }

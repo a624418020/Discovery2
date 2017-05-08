@@ -13,15 +13,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import milai.meishipintu.com.faxianlite.Constant;
+import milai.meishipintu.com.faxianlite.DiscoverApplication;
 import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.Tool.CircleImageView;
+import milai.meishipintu.com.faxianlite.Tool.StringUtils;
 import milai.meishipintu.com.faxianlite.Tool.ToastUtils;
 import milai.meishipintu.com.faxianlite.constract.PersonalInfoContract;
+import milai.meishipintu.com.faxianlite.model.PreferrenceHepler;
 import milai.meishipintu.com.faxianlite.model.beans.UserInfo;
 import milai.meishipintu.com.faxianlite.presenter.PersonalInfoPresenter;
 
@@ -44,6 +50,7 @@ public class PersonalInformationActivity extends AppCompatActivity implements Pe
 
     private PersonalInfoContract.IPresenter mPresenter;
     private Uri tempUri;
+    private UserInfo userInfo;      //用户信息
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,7 @@ public class PersonalInformationActivity extends AppCompatActivity implements Pe
 
     @OnClick({R.id.bt_return, R.id.circleimageview, R.id.rl_nick_name, R.id.rl_sex, R.id.rl_tel, R.id.rl_pass})
     public void onViewClicked(View view) {
+        Intent intent = null;
         switch (view.getId()) {
             case R.id.bt_return:
                 onBackPressed();
@@ -69,13 +77,22 @@ public class PersonalInformationActivity extends AppCompatActivity implements Pe
                 showChoosePicDialog();
                 break;
             case R.id.rl_nick_name:
+                intent=new Intent(this,SetnameActivity.class);
                 break;
             case R.id.rl_sex:
+                intent=new Intent(this,SexActivity.class);
                 break;
             case R.id.rl_tel:
+                intent=new Intent(this,ModifyPhoneActivity.class);
                 break;
             case R.id.rl_pass:
+                intent=new Intent(this,SetpasswordActivity.class);
                 break;
+        }
+        if(intent!=null){
+            intent.putExtra("userInfo", userInfo);
+            Log.d("PersonalInfo", "userInfo now:" + userInfo.toString());
+            startActivityForResult(intent, Constant.INFO_SETTING);
         }
     }
 
@@ -113,7 +130,15 @@ public class PersonalInformationActivity extends AppCompatActivity implements Pe
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) { // 如果返回码是可以用的
+        if(requestCode == Constant.INFO_SETTING && resultCode == RESULT_OK){
+            //刷新页面
+            UserInfo userInfo = (UserInfo) data.getExtras().get("userInfo");
+            //修改储存的userInfo
+            DiscoverApplication.setUser(userInfo);
+            PreferrenceHepler.saveUser(userInfo);
+            onPersonalInfoGet(userInfo);
+        } else if (resultCode == RESULT_OK) {
+            //选照片或拍照返回
             switch (requestCode) {
                 case TAKE_PICTURE:
                     startPhotoZoom(tempUri); // 开始对图片进行裁剪处理
@@ -125,6 +150,9 @@ public class PersonalInformationActivity extends AppCompatActivity implements Pe
                     if (data != null) {
                         setImageToView(data); // 让刚才选择裁剪得到的图片显示在界面上
                     }
+                    break;
+                case R.id.rl_nick_name:
+                    // 返回名字
                     break;
             }
         }
@@ -157,6 +185,8 @@ public class PersonalInformationActivity extends AppCompatActivity implements Pe
         startActivityForResult(intent, CROP_SMALL_PICTURE);
     }
 
+
+
     //from PersonalInfoContract.IView
     @Override
     public void showError(String err) {
@@ -167,9 +197,14 @@ public class PersonalInformationActivity extends AppCompatActivity implements Pe
     @Override
     public void onPersonalInfoGet(UserInfo userInfo) {
         if (userInfo != null) {
+            this.userInfo = userInfo;
             tvNickName.setText(userInfo.getName());
             tvSex.setText(userInfo.getSex() == 0 ? "男" : "女");
             tvTel.setText(userInfo.getTel());
+            if (!StringUtils.isNullOrEmpty(userInfo.getAvatar())) {
+                Glide.with(this).load(userInfo.getAvatar())
+                        .error(R.drawable.icon_avantar).into(circleimageview);
+            }
         } else {
             showError("获取用户信息失败，请稍后再试");
         }

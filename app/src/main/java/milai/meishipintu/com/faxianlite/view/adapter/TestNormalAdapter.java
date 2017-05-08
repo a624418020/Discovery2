@@ -16,10 +16,10 @@ import milai.meishipintu.com.faxianlite.R;
 
 public class TestNormalAdapter extends StaticPagerAdapter{
     private int[] imgs = {
-            R.drawable.ic_launcher,
-            R.drawable.ic_launcher,
-            R.drawable.ic_launcher,
-            R.drawable.ic_launcher,
+            R.drawable.icon_avantar,
+            R.drawable.icon_avantar,
+            R.drawable.icon_avantar,
+            R.drawable.icon_avantar,
     };
 
 

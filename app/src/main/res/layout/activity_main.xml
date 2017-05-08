@@ -8,11 +8,13 @@
         android:id="@+id/ll"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="49dp" >
+        android:layout_height="50dp"
+        android:orientation="horizontal">
         <RelativeLayout
             android:id="@+id/recommend"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:layout_marginTop="9dp"
             android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/iv_recommend"
@@ -26,31 +28,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:textSize="10sp"
+                android:layout_marginTop="5dp"
                 android:text="推举"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/mine"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:layout_marginTop="9dp"
             android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/iv_mine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/icon_mine_pre"/>
             <TextView
                 android:id="@+id/tv_mine"
+                android:layout_below="@id/iv_mine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="我的"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"
+                android:textSize="10sp"
+                android:layout_marginTop="5dp"/>
         </RelativeLayout>
     </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_above="@id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#acacac" />
+
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/ll">
+        android:layout_above="@id/divider">
     </android.support.v4.view.ViewPager>
 </RelativeLayout>
 

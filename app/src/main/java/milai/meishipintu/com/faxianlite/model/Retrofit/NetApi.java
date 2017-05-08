@@ -1,6 +1,9 @@
 package milai.meishipintu.com.faxianlite.model.Retrofit;
 
 import android.support.annotation.Nullable;
+import android.util.Log;
+
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -69,4 +72,8 @@ public class NetApi {
 
     //修改密码
 
+    //修改昵称或性别
+    public Observable<UserInfo> updateUserInfo(String uid, @Nullable String name, @Nullable Integer sex) {
+        return netService.updateUserInfoHttp(uid, name, sex).map(new MyResultFunc<UserInfo>());
+    }
 }

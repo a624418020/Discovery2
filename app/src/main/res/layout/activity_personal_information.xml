@@ -5,6 +5,7 @@
     android:id="@+id/activity_personal_information"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="milai.meishipintu.com.faxianlite.view.activity.PersonalInformationActivity">
 
@@ -18,8 +19,7 @@
         android:paddingLeft="19dp"
         android:paddingRight="18dp"
         android:background="#F5F5F5"
-        android:layout_marginBottom="21dp"
-        android:layout_below="@id/roll_view_pager">
+        android:layout_marginBottom="21dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:layout_width="85dp"
                 android:layout_height="85dp"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/ic_launcher"
+                android:src="@drawable/icon_avantar"
                 app:border_color="#00000000"
                 app:border_width="1dp" />
             <TextView

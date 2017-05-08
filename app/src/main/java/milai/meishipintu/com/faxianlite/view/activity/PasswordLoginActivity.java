@@ -27,6 +27,9 @@ public class PasswordLoginActivity extends AppCompatActivity implements Password
     EditText etPassword;
 
     private PasswordLoginContract.IPresenter mPresenter;
+    //记录输入量
+    private String tel;
+    private String passwordInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -9,4 +9,10 @@
     <string name="err_input">输入项不能为空</string>
     <string name="err_vcode">您输入的验证码不正确</string>
     <string name="personal_info">个人资料</string>
+    <string name="getVerifyCode">获取验证码</string>
+    <string name="exit">再按一次退出发现</string>
+    <string name="change_nick_name">修改昵称</string>
+    <string name="old_pass">请输入原始密码</string>
+    <string name="new_pass">请输入新密码（6位及以上字符）</string>
+    <string name="newpass_err">两次输入密码不一致</string>
 </resources>
