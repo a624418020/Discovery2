@@ -1,5 +1,6 @@
 package milai.meishipintu.com.faxianlite.constract;
 
+import milai.meishipintu.com.faxianlite.model.beans.UserInfo;
 import milai.meishipintu.com.faxianlite.presenter.BasicPresenter;
 import milai.meishipintu.com.faxianlite.view.BasicView;
 
@@ -17,7 +18,7 @@ public interface MineContract {
         void getNotice();
 
         //设置个人头像
-        void getHeadportrait();
+        void getUserInfo();
 
         //获取第三方支持数据
         void getGridData();
@@ -28,11 +29,9 @@ public interface MineContract {
         //判断是否有新消息
         void dealWithNewestNotice(int number);
 
-        //设置头像
-        void setHeadportrait(String url);
-
         //显示第三方app
         void showGrid(int[] iconId,String[] iconName);
 
+        void onUserInfoGet(UserInfo userInfo);
     }
 }

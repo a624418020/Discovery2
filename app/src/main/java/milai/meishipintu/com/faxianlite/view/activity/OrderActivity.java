@@ -20,6 +20,7 @@ import butterknife.OnClick;
 import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.constract.OrderContract;
 import milai.meishipintu.com.faxianlite.model.beans.Order;
+import milai.meishipintu.com.faxianlite.model.beans.Recommend;
 import milai.meishipintu.com.faxianlite.presenter.OrderPresenter;
 
 public class OrderActivity extends AppCompatActivity implements OrderContract.IView {
@@ -55,6 +56,7 @@ public class OrderActivity extends AppCompatActivity implements OrderContract.IV
     private List<Order> data;
     private RequestManager manager;
     private String time;
+    private Recommend recommend;
     private OrderContract.IPresenter orderPresenter;
     private Order order;
     private int quantity=1;
@@ -66,7 +68,7 @@ public class OrderActivity extends AppCompatActivity implements OrderContract.IV
         ButterKnife.bind(this);
         //从商品页面传递过来的商品信息
         list=new ArrayList<>();
-        list.addAll((List<Order>)getIntent().getSerializableExtra("list"));
+        recommend = (Recommend) getIntent().getSerializableExtra("Recommend");
         order=list.get(0);
         manager = Glide.with(this);
         orderPresenter = new OrderPresenter(this);

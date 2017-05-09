@@ -5,11 +5,20 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import milai.meishipintu.com.faxianlite.Constant;
 import milai.meishipintu.com.faxianlite.model.beans.Recommend;
 import milai.meishipintu.com.faxianlite.model.beans.UserInfo;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -75,5 +84,15 @@ public class NetApi {
     //修改昵称或性别
     public Observable<UserInfo> updateUserInfo(String uid, @Nullable String name, @Nullable Integer sex) {
         return netService.updateUserInfoHttp(uid, name, sex).map(new MyResultFunc<UserInfo>());
+    }
+
+    //报存用户头像
+    public Observable<UserInfo> addHeaderPic(File photeFile, String uid) {
+        //将file类型转化为MultipartBody.part类型
+        RequestBody photoRequestBody = RequestBody.create(MediaType.parse("image/*"), photeFile);
+        MultipartBody.Part photo = MultipartBody.Part.createFormData("picture", "avator.jpg", photoRequestBody);
+        //MultipartBody.Part uidPart = MultipartBody.Part.createFormData("uid", uid);
+        RequestBody uidRequest = RequestBody.create(null, uid);
+        return netService.addHeaderPicHttp(photo, uidRequest).map(new MyResultFunc<UserInfo>());
     }
 }

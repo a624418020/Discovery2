@@ -13,18 +13,17 @@ import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.model.PreferrenceHepler;
 
 public class SettingActivity extends AppCompatActivity {
-    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_site);
         ButterKnife.bind(this);
-        intent=new Intent();
     }
 
     @OnClick({R.id.bt_return, R.id.bt_presonalinformation, R.id.bt_cache, R.id.bt_aboutus, R.id.bt_comments, R.id.bt_logout})
     public void onClick(View view) {
+        Intent intent = null;
         switch (view.getId()) {
             case R.id.bt_return:
                 onBackPressed();
@@ -44,7 +43,7 @@ public class SettingActivity extends AppCompatActivity {
                 PreferrenceHepler.clearUserInfo();
                 DiscoverApplication.setUser(null);
                 //重启登录
-                Intent intent = new Intent(SettingActivity.this, MainActivity.class);
+                intent = new Intent(SettingActivity.this, MainActivity.class);
                 intent.putExtra("type", Constant.LOGOUT_SUCCESS);
                 startActivity(intent);
                 this.finish();

@@ -13,7 +13,7 @@ import milai.meishipintu.com.faxianlite.R;
 /**
  * Created by tangyangkai on 16/6/12.
  */
-public class MyRecyclerView extends HorizontalScrollView {
+public class CanScrollItemView extends HorizontalScrollView {
 
 
     private TextView mTextView_Delete;
@@ -22,15 +22,15 @@ public class MyRecyclerView extends HorizontalScrollView {
     private Boolean isOpen = false;
     private Boolean once = false;
 
-    public MyRecyclerView(Context context) {
+    public CanScrollItemView(Context context) {
         this(context, null);
     }
 
-    public MyRecyclerView(Context context, AttributeSet attrs) {
+    public CanScrollItemView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MyRecyclerView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CanScrollItemView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.setOverScrollMode(OVER_SCROLL_NEVER);
     }
@@ -115,9 +115,10 @@ public class MyRecyclerView extends HorizontalScrollView {
     }
 
     public interface IonSlidingButtonListener {
+
         void onMenuIsOpen(View view);
 
-        void onDownOrMove(MyRecyclerView myRecyclerView);
+        void onDownOrMove(CanScrollItemView canScrollItemView);
     }
 
 }

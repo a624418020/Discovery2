@@ -6,24 +6,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import milai.meishipintu.com.faxianlite.R;
-import milai.meishipintu.com.faxianlite.Tool.MyRecyclerView;
+import milai.meishipintu.com.faxianlite.Tool.CanScrollItemView;
 
 /**
  * Created by tangyangkai on 16/6/12.
  */
 
 
-public class WantAdapter extends RecyclerView.Adapter<WantedViewHolder> implements MyRecyclerView.IonSlidingButtonListener {
+public class WantAdapter extends RecyclerView.Adapter<WantedViewHolder> implements CanScrollItemView.IonSlidingButtonListener {
+
     private Context mContext;
     private IonSlidingViewClickListener mIDeleteBtnClickListener;
     private List<String> mDatas = new ArrayList<String>();
-    private MyRecyclerView mMenu = null;
+    private CanScrollItemView mMenu = null;
+
     public WantAdapter(Context context) {
         mContext = context;
         mIDeleteBtnClickListener = (IonSlidingViewClickListener) context;
@@ -31,6 +32,7 @@ public class WantAdapter extends RecyclerView.Adapter<WantedViewHolder> implemen
             mDatas.add("第"+i+"个测试");
         }
     }
+
     public void updateData( List<String> mDatas){
         this.mDatas = mDatas;
         notifyDataSetChanged();
@@ -42,7 +44,15 @@ public class WantAdapter extends RecyclerView.Adapter<WantedViewHolder> implemen
     }
 
     @Override
-    public void onBindViewHolder(final WantedViewHolder holder, int position) {
+    public WantedViewHolder onCreateViewHolder(ViewGroup arg0, int arg1) {
+        CanScrollItemView view = (CanScrollItemView) LayoutInflater.from(mContext).inflate(R.layout.item_want_recycler, arg0, false);
+        WantedViewHolder holder = new WantedViewHolder(view);
+        view.setSlidingButtonListener(this);
+        return holder;
+    }
+
+    @Override
+    public void onBindViewHolder(final WantedViewHolder holder, final int position) {
         holder.textView.setText(mDatas.get(position));
         //设置内容布局的宽为屏幕宽度
         WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
@@ -63,32 +73,26 @@ public class WantAdapter extends RecyclerView.Adapter<WantedViewHolder> implemen
         holder.btn_Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int n = holder.getLayoutPosition();
-                mIDeleteBtnClickListener.onDeleteBtnCilck(v, n);
+//                mIDeleteBtnClickListener.onDeleteBtnCilck(v, position);
+                mDatas.remove(position);
+                WantAdapter.this.notifyItemRemoved(position);
+                WantAdapter.this.notifyItemChanged(position, mDatas.size() - position);
             }
         });
     }
 
     @Override
-    public WantedViewHolder onCreateViewHolder(ViewGroup arg0, int arg1) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_want_recycler, arg0,false);
-        WantedViewHolder holder = new WantedViewHolder(view);
-        return holder;
-    }
-
-    @Override
     public void onMenuIsOpen(View view) {
-        mMenu = (MyRecyclerView) view;
-
+        mMenu = (CanScrollItemView) view;
     }
     /**
      * 滑动或者点击了Item监听
-     * @param myRecyclerView
+     * @param canScrollItemView
      */
     @Override
-    public void onDownOrMove(MyRecyclerView myRecyclerView) {
+    public void onDownOrMove(CanScrollItemView canScrollItemView) {
         if(menuIsOpen()){
-            if(mMenu != myRecyclerView){
+            if(mMenu != canScrollItemView){
                 closeMenu();
             }
         }
@@ -115,7 +119,9 @@ public class WantAdapter extends RecyclerView.Adapter<WantedViewHolder> implemen
     }
 
     public interface IonSlidingViewClickListener {
+
         void onItemClick(View view, int position);
+
         void onDeleteBtnCilck(View view, int position);
     }
 }

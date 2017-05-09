@@ -35,7 +35,7 @@ public class DiscoverApplication extends Application {
         super.onCreate();
         instance = this;
         //初始化Bugly
-        Bugly.init(getApplicationContext(), "a50e729142", true);
+//        Bugly.init(getApplicationContext(), "a50e729142", true);
         user = PreferrenceHepler.getUser();
     }
 }

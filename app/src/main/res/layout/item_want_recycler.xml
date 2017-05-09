@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<milai.meishipintu.com.faxianlite.Tool.MyRecyclerView
+<milai.meishipintu.com.faxianlite.Tool.CanScrollItemView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="106dp"
@@ -66,12 +66,13 @@
         </RelativeLayout>
         <TextView
             android:id="@+id/tv_delete"
-            android:layout_width="80dp"
+            android:layout_width="45dp"
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/layout_content"
+            android:layout_marginLeft="15dp"
             android:background="#000000"
             android:gravity="center"
             android:text="删 除"
             android:textColor="#DDFFFFFF"/>
     </RelativeLayout>
-</milai.meishipintu.com.faxianlite.Tool.MyRecyclerView>
+</milai.meishipintu.com.faxianlite.Tool.CanScrollItemView>

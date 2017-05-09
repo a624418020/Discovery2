@@ -16,4 +16,9 @@
     <color name="black_overlay">#66000000</color>
     <color name="splash_text_black">#21242a</color>
     <color name="background">#f5f5f5</color>
+    <color name="gray">#8c8c8c</color>
+    <color name="untransparent_gray">#e4e4e4</color>
+    <color name="buttonblue">#3aaaeb</color>
+    <color name="transparent">#00000000</color>
+
 </resources>

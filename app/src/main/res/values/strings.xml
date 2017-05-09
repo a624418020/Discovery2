@@ -15,4 +15,5 @@
     <string name="old_pass">请输入原始密码</string>
     <string name="new_pass">请输入新密码（6位及以上字符）</string>
     <string name="newpass_err">两次输入密码不一致</string>
+    <string name="not_open">暂未开放，敬请期待</string>
 </resources>

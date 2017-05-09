@@ -6,9 +6,14 @@ import java.util.List;
 
 import milai.meishipintu.com.faxianlite.model.beans.Recommend;
 import milai.meishipintu.com.faxianlite.model.beans.UserInfo;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import rx.Observable;
 
 /**
@@ -43,10 +48,13 @@ public interface NetService {
 
     //修改昵称/性别
     @FormUrlEncoded
-    @POST("Api/Api/updateUserInfo")
+    @POST("/Api/Api/updateUserInfo")
     Observable<HttpResult<UserInfo>> updateUserInfoHttp(@Field("uid") String uid, @Nullable @Field("name") String name
             , @Nullable @Field("sex") Integer sex);
 
-    //
+    //保存用户头像
+    @Multipart
+    @POST("/Api/Api/upload")
+    Observable<HttpResult<UserInfo>> addHeaderPicHttp(@Part MultipartBody.Part file1, @Part("uid") RequestBody uid);
 
 }

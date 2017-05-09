@@ -8,7 +8,6 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import milai.meishipintu.com.faxianlite.R;
-import milai.meishipintu.com.faxianlite.Tool.MyRecyclerView;
 
 /**
  * Created by Administrator on 2017/5/3.

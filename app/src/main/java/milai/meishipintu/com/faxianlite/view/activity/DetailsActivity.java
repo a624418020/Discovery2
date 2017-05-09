@@ -8,10 +8,10 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import milai.meishipintu.com.faxianlite.R;
+import milai.meishipintu.com.faxianlite.Tool.MScrollView;
 import milai.meishipintu.com.faxianlite.Tool.ObservableWebView;
 import milai.meishipintu.com.faxianlite.constract.DetailContract;
 import milai.meishipintu.com.faxianlite.model.beans.Order;
@@ -38,10 +39,15 @@ public class DetailsActivity extends AppCompatActivity implements DetailContract
     TextView tvName;
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.scrollview)
+    MScrollView scrollview;
+    @BindView(R.id.button)
+    LinearLayout button;
     private List<Order> list;
     private DetailContract.IPresenter mPresenter;
     private Recommend recommend;
     private ObservableWebView mwebview;
+    private boolean show=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,33 +84,40 @@ public class DetailsActivity extends AppCompatActivity implements DetailContract
         }
         WebSettings settings = mwebview.getSettings();
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        mwebview.setOnScrollChangedCallback(new ObservableWebView.OnScrollChangedCallback() {
-            public void onScroll(int dx, int dy) {
-                Log.i("dy",dy+"");
-                //这里我们根据dx和dy参数做自己想做的事情
+        scrollview.setOnScrollChangedCallback(new MScrollView.OnScrollChangedCallback() {
+            @Override
+            public void onScroll(boolean direction) {
+                if(show!=direction){ //防止滚动时一直触发
+                    if (direction) {
+                        button.setVisibility(View.VISIBLE);
+                        show=direction;
+                    } else {
+                        button.setVisibility(View.INVISIBLE);
+                        show=direction;
+                    }
+                }
             }
         });
     }
 
 
-    @OnClick({R.id.bt_want, R.id.bt_join,R.id.bt_return})
+    @OnClick({R.id.bt_want, R.id.bt_join, R.id.bt_return})
     public void onClick(View view) {
-        Intent intent = new Intent();
+        Intent intent ;
         switch (view.getId()) {
             case R.id.bt_want:
-
                 //Intent传递参数
-                intent.putExtra("list", (Serializable) list);
-                intent.setClass(this, WantActivity.class);
-                startActivity(intent);
+
                 break;
             case R.id.bt_join:
                 //Intent传递参数
-                intent.putExtra("list", (Serializable) list);
-                intent.setClass(this, OrderActivity.class);
+                intent = new Intent(this, OrderActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Recommend",recommend);
+                intent.putExtras(bundle);
                 startActivity(intent);
                 break;
-            case  R.id.bt_return:{
+            case R.id.bt_return: {
                 finish();
 
             }

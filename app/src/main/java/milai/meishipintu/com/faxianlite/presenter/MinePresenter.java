@@ -1,5 +1,6 @@
 package milai.meishipintu.com.faxianlite.presenter;
 
+import milai.meishipintu.com.faxianlite.DiscoverApplication;
 import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.constract.MineContract;
 
@@ -43,7 +44,6 @@ public class MinePresenter implements MineContract.IPresenter {
     //from MineContract.IPresenter
     @Override
     public void unsubscrib() {
-
     }
 
     //from MineContract.IPresenter
@@ -54,7 +54,7 @@ public class MinePresenter implements MineContract.IPresenter {
 
     //from MineContract.IPresenter
     @Override
-    public void getHeadportrait() {
-
+    public void getUserInfo() {
+        mineViewInterface.onUserInfoGet(DiscoverApplication.getUser());
     }
 }

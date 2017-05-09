@@ -22,9 +22,9 @@
                  android:layout_height="75dp"
                  android:layout_centerHorizontal="true"
                  android:src="@drawable/icon_avantar"
-                 app:border_color="#000000"
-                 app:border_width="1dp" />
+                 />
             <TextView
+                android:id="@+id/tv_name"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:layout_centerHorizontal="true"

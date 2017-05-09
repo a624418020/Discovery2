@@ -6,7 +6,8 @@
     <include
         android:id="@+id/titlebar_title"
         layout="@layout/titlebar_title"/>
-    <ScrollView
+    <milai.meishipintu.com.faxianlite.Tool.MScrollView
+        android:id="@+id/scrollview"
         android:layout_below="@id/titlebar_title"
         android:layout_width="match_parent"
         android:background="@color/white"
@@ -69,10 +70,11 @@
                 android:layout_marginRight="8dp">
             </milai.meishipintu.com.faxianlite.Tool.ObservableWebView>
         </LinearLayout>
-    </ScrollView>
+    </milai.meishipintu.com.faxianlite.Tool.MScrollView>
 
 
     <LinearLayout
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/black"

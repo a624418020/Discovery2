@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/icon_home"/>
+                android:src="@drawable/selector_icon_home"/>
             <TextView
                 android:id="@+id/tv_recommend"
                 android:layout_below="@id/iv_recommend"
@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:textSize="10sp"
+                android:textColor="@drawable/selector_text_tab"
                 android:layout_marginTop="5dp"
                 android:text="推举"/>
         </RelativeLayout>
@@ -43,13 +44,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/icon_mine_pre"/>
+                android:src="@drawable/selector_icon_mine"/>
             <TextView
                 android:id="@+id/tv_mine"
                 android:layout_below="@id/iv_mine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="我的"
+                android:enabled="false"
+                android:textColor="@drawable/selector_text_tab"
                 android:layout_centerHorizontal="true"
                 android:textSize="10sp"
                 android:layout_marginTop="5dp"/>
@@ -63,11 +66,10 @@
         android:layout_height="0.5dp"
         android:background="#acacac" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpage"
+    <FrameLayout
+        android:id="@+id/fram"
+        android:layout_above="@id/divider"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/divider">
-    </android.support.v4.view.ViewPager>
+        android:layout_height="match_parent"/>
 </RelativeLayout>
 
