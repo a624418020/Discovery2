@@ -4,7 +4,9 @@ import android.support.annotation.Nullable;
 
 import java.util.List;
 
+import milai.meishipintu.com.faxianlite.model.beans.CouponResult;
 import milai.meishipintu.com.faxianlite.model.beans.Recommend;
+import milai.meishipintu.com.faxianlite.model.beans.Red;
 import milai.meishipintu.com.faxianlite.model.beans.UserInfo;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -44,6 +46,16 @@ public interface NetService {
     @POST("/Api/Api/applet_news")
     Observable<HttpResult<List<Recommend>>> getMainInfoListHttp(@Nullable @Field("number") String number);
 
+    //获取活动信息
+    @FormUrlEncoded
+    @POST("https://a.milaipay.com/mspt/Applet/getActivityByNewsId")
+    Observable<HttpResult<List<Red>>> getActivityInformationHttp(@Nullable @Field("news_id") String news_id);
+    //获取活动信息
+    @FormUrlEncoded
+    @POST("https://a.milaipay.com/wap/coupon/doreceive")
+    Observable<CouponResult> getCouponInformationHttp(@Nullable @Field("uniqid") String uniqid,
+                                                              @Nullable @Field("bundle") String bundle,
+                                                              @Nullable @Field("mobile") String mobile);
     //修改密码
 
     //修改昵称/性别

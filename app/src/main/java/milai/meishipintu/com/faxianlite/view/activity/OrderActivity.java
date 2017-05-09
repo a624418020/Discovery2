@@ -2,6 +2,7 @@ package milai.meishipintu.com.faxianlite.view.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,8 +20,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.constract.OrderContract;
+import milai.meishipintu.com.faxianlite.model.beans.Coupon;
 import milai.meishipintu.com.faxianlite.model.beans.Order;
 import milai.meishipintu.com.faxianlite.model.beans.Recommend;
+import milai.meishipintu.com.faxianlite.model.beans.Red;
 import milai.meishipintu.com.faxianlite.presenter.OrderPresenter;
 
 public class OrderActivity extends AppCompatActivity implements OrderContract.IView {
@@ -69,10 +72,12 @@ public class OrderActivity extends AppCompatActivity implements OrderContract.IV
         //从商品页面传递过来的商品信息
         list=new ArrayList<>();
         recommend = (Recommend) getIntent().getSerializableExtra("Recommend");
-        order=list.get(0);
+//        order=list.get(0);
         manager = Glide.with(this);
         orderPresenter = new OrderPresenter(this);
-        settext(order);
+        orderPresenter.getCouponInfo(161+"");
+        orderPresenter.paticipate(null,"jcdkvy36","18115168206");
+//        settext(order);
     }
 
     private void settext(Order order){
@@ -110,16 +115,16 @@ public class OrderActivity extends AppCompatActivity implements OrderContract.IV
 
     }
 
-    //from OrderContract.IView
-    @Override
-    public void showCouponInfo() {
 
+    @Override
+    public void showCouponInfo(List<Red> list) {
+        Log.i("News_id",list.get(0).getNews_id());
     }
 
     //from OrderContract.IView
     @Override
-    public void onPaticipateSucess() {
-
+    public void onPaticipateSucess( Coupon coupon) {
+        Log.i("News_id",coupon.getName());
     }
 
     @Override

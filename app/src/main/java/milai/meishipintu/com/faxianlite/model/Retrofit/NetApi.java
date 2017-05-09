@@ -3,8 +3,6 @@ package milai.meishipintu.com.faxianlite.model.Retrofit;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.google.gson.Gson;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,7 +11,10 @@ import java.io.IOException;
 import java.util.List;
 
 import milai.meishipintu.com.faxianlite.Constant;
+import milai.meishipintu.com.faxianlite.model.beans.Coupon;
+import milai.meishipintu.com.faxianlite.model.beans.CouponResult;
 import milai.meishipintu.com.faxianlite.model.beans.Recommend;
+import milai.meishipintu.com.faxianlite.model.beans.Red;
 import milai.meishipintu.com.faxianlite.model.beans.UserInfo;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -62,6 +63,28 @@ public class NetApi {
         }
         return observable.map(new MyResultFunc<List<Recommend>>());
     }
+    //获取活动信息
+    public Observable<List<Red>> getActivityInformation(String news_id){
+        Observable<HttpResult<List<Red>>> observable;
+        observable=netService.getActivityInformationHttp(news_id);
+        return observable.map(new MyResultFunc<List<Red>>());
+    }
+    //抢券
+    public Observable<Coupon> getCouponInformation(String uniqid,String bundle,String mobile){
+        return netService.getCouponInformationHttp(uniqid,bundle,mobile).map(new Func1<CouponResult,Coupon>() {
+            @Override
+            public Coupon call(CouponResult couponResult) {
+                Log.i("couponResult",couponResult.toString());
+                if(couponResult.getStatus()!=1){
+                    throw new RuntimeException(couponResult.getInfo());
+                }else {
+                    return couponResult.getCoupon();
+                }
+            }
+        });
+
+    }
+
 
     //获取验证码
     public Observable<String> getVerifyCode(String tel) {

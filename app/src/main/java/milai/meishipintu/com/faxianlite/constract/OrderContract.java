@@ -1,5 +1,9 @@
 package milai.meishipintu.com.faxianlite.constract;
 
+import java.util.List;
+
+import milai.meishipintu.com.faxianlite.model.beans.Coupon;
+import milai.meishipintu.com.faxianlite.model.beans.Red;
 import milai.meishipintu.com.faxianlite.presenter.BasicPresenter;
 import milai.meishipintu.com.faxianlite.view.BasicView;
 
@@ -14,16 +18,16 @@ public interface OrderContract {
     interface IPresenter extends BasicPresenter{
 
         //获取活动信息
-        void getCouponInfo(int id);
+        void getCouponInfo(String id);
 
         //参与活动
-        void paticipate(String name, String number, int id);
+        void paticipate(String uniqid, String bundleid, String mobile);
     }
 
     interface IView extends BasicView{
 
-        void showCouponInfo();
+        void showCouponInfo(List<Red> list);
 
-        void onPaticipateSucess();
+        void onPaticipateSucess(Coupon coupon);
     }
 }

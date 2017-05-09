@@ -1,9 +1,18 @@
 package milai.meishipintu.com.faxianlite.presenter;
 
+import android.util.Log;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import milai.meishipintu.com.faxianlite.constract.OrderContract;
-import milai.meishipintu.com.faxianlite.model.beans.Order;
+import milai.meishipintu.com.faxianlite.model.Retrofit.NetApi;
+import milai.meishipintu.com.faxianlite.model.beans.Coupon;
+import milai.meishipintu.com.faxianlite.model.beans.Red;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by Administrator on 2017/4/27 0027.
@@ -11,23 +20,76 @@ import milai.meishipintu.com.faxianlite.model.beans.Order;
 
 public class OrderPresenter implements OrderContract.IPresenter {
     private OrderContract.IView orderViewInterface;
-    private List<Order> list;
+    private List<Red> list;
+    private Red luckymoney;
+    private CompositeSubscription subscriptions;
+    private NetApi netApi;
+    private Coupon mcoupon;
+    private String onerror;
 
     public OrderPresenter(OrderContract.IView orderViewInterface){
         this.orderViewInterface=orderViewInterface;
+        subscriptions = new CompositeSubscription();
     }
 
+    public void getCouponInfo(String news_id){
+        list=new ArrayList<>();
+        netApi=NetApi.getInstance();
+        subscriptions.add(netApi.getActivityInformation(news_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Red>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("a",e+"");
+                    }
+
+                    @Override
+                    public void onNext(List<Red> reds) {
+                        Log.i("a","成功");
+                        list.addAll(reds);
+                        orderViewInterface.showCouponInfo(list);
+                    }
+                })
+
+        );
+
+
+
+    }
 
     //from OrderContract.IPresenter
     @Override
-    public void getCouponInfo(int id) {
+    public void paticipate(String uniqid, String bundleid, String mobile) {
+        netApi=NetApi.getInstance();
+        subscriptions.add(netApi.getCouponInformation(uniqid,bundleid,mobile)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Coupon>() {
+                    @Override
+                    public void onCompleted() {
 
-    }
+                    }
 
-    //from OrderContract.IPresenter
-    @Override
-    public void paticipate(String name, String number, int id) {
+                    @Override
+                    public void onError(Throwable e) {
+                        onerror=e.toString();
+                        Log.i("bb",onerror+"");
+                    }
 
+                    @Override
+                    public void onNext(Coupon coupon) {
+                        Log.i("bb","成功");
+                        mcoupon=coupon;
+                        orderViewInterface.onPaticipateSucess(mcoupon);
+                    }
+                })
+        );
     }
 
     //from OrderContract.IPresenter
