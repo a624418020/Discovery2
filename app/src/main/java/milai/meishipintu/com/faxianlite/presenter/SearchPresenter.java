@@ -23,7 +23,7 @@ public class SearchPresenter implements SearchContract.IPresenter {
     }
 
     @Override
-    public void getHistory() {
+    public void loadHistory() {
 
     }
 
