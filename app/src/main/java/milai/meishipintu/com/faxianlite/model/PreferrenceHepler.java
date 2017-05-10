@@ -3,6 +3,7 @@ package milai.meishipintu.com.faxianlite.model;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
+import android.util.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -10,6 +11,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
+import java.util.Arrays;
+import java.util.List;
 
 import milai.meishipintu.com.faxianlite.DiscoverApplication;
 import milai.meishipintu.com.faxianlite.Tool.StringUtils;
@@ -104,6 +107,38 @@ public class PreferrenceHepler {
         SharedPreferences.Editor editor = getSharePreference().edit();
         editor.remove("user");
         editor.apply();
+    }
+
+    public static void saveSearchHistory(List<String> history) {
+        if (history.size() <= 0) {
+            return;
+        }
+        int size = history.size() > 10 ? 10 : history.size();
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            builder.append(history.get(i));
+            if (i != size - 1) {
+                builder.append(",");
+            }
+        }
+        String save = builder.toString();
+        SharedPreferences.Editor editor = getSharePreference().edit();
+        editor.putString("history", save);
+        editor.apply();
+    }
+
+    public static List<String> loadSearchHistory() {
+        SharedPreferences sharePreference = getSharePreference();
+        String history = sharePreference.getString("history", "");
+        String[] split = history.split(",");
+        Log.d("Preferrence", "history:" + Arrays.toString(split));
+        return Arrays.asList(split);
+    }
+
+    public static void clearHistory() {
+        SharedPreferences.Editor edit = getSharePreference().edit();
+        edit.remove("history");
+        edit.apply();
     }
 
 }

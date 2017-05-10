@@ -5,21 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 
 import java.util.List;
 
-import butterknife.BindView;
 import milai.meishipintu.com.faxianlite.R;
-import milai.meishipintu.com.faxianlite.Tool.CanScrollItemView;
-import milai.meishipintu.com.faxianlite.Tool.ChooseHeadViewDialog;
 import milai.meishipintu.com.faxianlite.model.beans.WantItem;
 import milai.meishipintu.com.faxianlite.view.activity.OnItemClickListener;
-import milai.meishipintu.com.faxianlite.view.activity.WantActivity;
 
 /**
  * Created by tangyangkai on 16/6/12.
@@ -57,7 +51,7 @@ public class WantAdapter extends RecyclerView.Adapter<WantedViewHolder>  {
         final int positionNow = position;
         final WantItem wantItem = mData.get(position);
         holder.tvTitle.setText(wantItem.getTitle());
-        requestManager.load("http://" + wantItem.getLogo()).error(R.drawable.default_samll_square).into(holder.commodityImage);
+        requestManager.load("http://" + wantItem.getLogo()).into(holder.commodityImage);
         holder.btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

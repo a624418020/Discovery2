@@ -203,4 +203,9 @@ public class NetApi {
             }
         });
     }
+
+    //搜索
+    public Observable<List<Recommend>> search(String content){
+        return netService.searchHttp(content).map(new MyResultFunc<List<Recommend>>());
+    }
 }

@@ -50,6 +50,8 @@
                 android:paddingLeft="5dp"
                 android:gravity="center_vertical"
                 android:hint="搜索好物件"
+                android:inputType="text"
+                android:imeOptions="actionSearch"
                 android:textColorHint="#88ffffff"/>
         </RelativeLayout>
     </RelativeLayout>

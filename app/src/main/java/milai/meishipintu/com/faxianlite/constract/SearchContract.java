@@ -22,6 +22,8 @@ public interface SearchContract {
 
         void doSearch(String content);
 
+        void addToHistory(List<String> history, String content);
+
     }
 
     interface IView extends BasicView {

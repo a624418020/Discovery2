@@ -62,8 +62,8 @@ public interface NetService {
     @FormUrlEncoded
     @POST("https://a.milaipay.com/wap/coupon/doreceive")
     Observable<CouponResult> getCouponInformationHttp(@Nullable @Field("uniqid") String uniqid,
-                                                              @Nullable @Field("bundle") String bundle,
-                                                              @Nullable @Field("mobile") String mobile);
+                                                      @Nullable @Field("bundle") String bundle,
+                                                      @Nullable @Field("mobile") String mobile);
 
 
     //参与活动
@@ -105,4 +105,9 @@ public interface NetService {
     @FormUrlEncoded
     @POST("/Api/Api/getUserCollectionList")
     Observable<HttpResult<List<WantItem>>> getWantListHttp(@Field("uid") String uid);
+
+    //搜索
+    @FormUrlEncoded
+    @POST("/Api/Api/applet_search")
+    Observable<HttpResult<List<Recommend>>> searchHttp(@Field("content") String content);
 }
