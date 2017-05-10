@@ -3,11 +3,16 @@ package milai.meishipintu.com.faxianlite.model.Retrofit;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import milai.meishipintu.com.faxianlite.Constant;
 import milai.meishipintu.com.faxianlite.Tool.StringUtils;
+import milai.meishipintu.com.faxianlite.model.beans.Collection;
 import milai.meishipintu.com.faxianlite.model.beans.Coupon;
 import milai.meishipintu.com.faxianlite.model.beans.CouponResult;
 import milai.meishipintu.com.faxianlite.model.beans.Recommend;
@@ -17,6 +22,7 @@ import milai.meishipintu.com.faxianlite.model.beans.WantItem;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
