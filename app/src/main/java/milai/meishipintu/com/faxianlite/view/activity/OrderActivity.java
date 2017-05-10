@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -21,7 +20,6 @@ import butterknife.OnClick;
 import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.constract.OrderContract;
 import milai.meishipintu.com.faxianlite.model.beans.Coupon;
-import milai.meishipintu.com.faxianlite.model.beans.Order;
 import milai.meishipintu.com.faxianlite.model.beans.Recommend;
 import milai.meishipintu.com.faxianlite.model.beans.Red;
 import milai.meishipintu.com.faxianlite.presenter.OrderPresenter;
@@ -32,6 +30,10 @@ public class OrderActivity extends AppCompatActivity implements OrderContract.IV
     TextView tvPeopleName;
     @BindView(R.id.tv_People_phone)
     TextView tvPeoplePhone;
+    @BindView(R.id.tv_name)
+    TextView tvname;
+    @BindView(R.id.tv_prompt)
+    TextView tvprompt;
     @BindView(R.id.tv_People_address)
     TextView tvPeopleAddress;
     @BindView(R.id.iv_Commodity_image)
@@ -55,56 +57,46 @@ public class OrderActivity extends AppCompatActivity implements OrderContract.IV
     @BindView(R.id.ed_phone)
     EditText edPhone;
 
-    private List<Order> list;
-    private List<Order> data;
     private RequestManager manager;
-    private String time;
     private Recommend recommend;
     private OrderContract.IPresenter orderPresenter;
-    private Order order;
-    private int quantity=1;
+    private Red red;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
         ButterKnife.bind(this);
-        //从商品页面传递过来的商品信息
-        list=new ArrayList<>();
         recommend = (Recommend) getIntent().getSerializableExtra("Recommend");
-//        order=list.get(0);
         manager = Glide.with(this);
         orderPresenter = new OrderPresenter(this);
-        orderPresenter.getCouponInfo(161+"");
-        orderPresenter.paticipate(null,"jcdkvy36","18115168206");
-//        settext(order);
+        orderPresenter.getCouponInfo(161 + "");
     }
 
-    private void settext(Order order){
-        tvPeopleName.setText(order.getPeople_name());
-        tvPeoplePhone.setText(order.getPeople_phone());
-        tvPeopleAddress.setText(order.getPeople_address());
-        manager.load(order.getCommodity_image()).into(ivCommodityImage);//加载网络图片
-        tvCommodityTitle.setText(order.getCommodity_title());
-        tvCommoditySubtitle.setText(order.getCommodity_subtitle());
-        tvCommodityValue.setText(order.getCommodity_value());//价值
-        tvQuantity.setText(quantity+"");
-        tvStarTime.setText(time);
+    private void settext(Red red) {
+        if (red != null) {
+            String url = "http://" + red.getCoupon().getShare_img();
+            tvPeopleName.setText("未发现");
+            tvPeoplePhone.setText(red.getPhone());
+            tvPeopleAddress.setText(red.getAddress());
+            manager.load(url).into(ivCommodityImage);//加载网络图片
+            tvCommodityTitle.setText(red.getCoupon().getTitle());
+            tvCommoditySubtitle.setText(red.getCoupon().getDescription());
+            tvCommodityValue.setText("未发现");//价值
+            tvQuantity.setText("1");
+            tvStarTime.setText(red.getStart_time() + "至" + red.getEnd_time());
+        }
+
     }
 
-    @OnClick({R.id.bt_addition, R.id.bt_join})
+    @OnClick({R.id.bt_return, R.id.bt_join})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.bt_addition:
-                quantity=quantity+1;
-                tvQuantity.setText(quantity+"");
+            case R.id.bt_return:
+                finish();
                 break;
             case R.id.bt_join:
-                order.setUser_name(edName.getText().toString());
-                order.setUser_phone(edPhone.getText().toString());
-                data=new ArrayList<>();
-                data.add(order);
-                rlSuccess.setVisibility(View.VISIBLE);
+                orderPresenter.paticipate(null, "jcdkvy36", "18115168206");
                 break;
         }
     }
@@ -118,13 +110,23 @@ public class OrderActivity extends AppCompatActivity implements OrderContract.IV
 
     @Override
     public void showCouponInfo(List<Red> list) {
-        Log.i("News_id",list.get(0).getNews_id());
+        red = list.get(0);
+        settext(red);
+        Log.i("News_id", list.get(0).getNews_id());
     }
 
     //from OrderContract.IView
     @Override
-    public void onPaticipateSucess( Coupon coupon) {
-        Log.i("News_id",coupon.getName());
+    public void onPaticipateSucess(Coupon coupon, String onerror) {
+        if (coupon != null && onerror == null) {
+//            tvprompt.setText(coupon.getCouponShow());
+            tvprompt.setText("记得安排好时间哦");
+        } else {
+            tvname.setText("参与失败");
+            tvprompt.setText(onerror);
+        }
+        rlSuccess.setVisibility(View.VISIBLE);
+        Log.i("News_id", coupon.getName());
     }
 
     @Override
@@ -132,4 +134,5 @@ public class OrderActivity extends AppCompatActivity implements OrderContract.IV
         super.onDestroy();
         orderPresenter.unsubscrib();
     }
+
 }

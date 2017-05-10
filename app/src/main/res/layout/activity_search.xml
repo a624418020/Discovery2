@@ -10,19 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@color/three_three_three">
-        <RelativeLayout
-            android:id="@+id/rl_03"
+
+        <TextView
+            android:id="@+id/back"
             android:layout_width="59dp"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="取消"
-                android:textColor="@color/white"
-                android:textSize="16dp"/>
-        </RelativeLayout>
+            android:layout_alignParentRight="true"
+            android:text="取消"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16dp"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="27dp"
@@ -56,6 +53,7 @@
                 android:textColorHint="#88ffffff"/>
         </RelativeLayout>
     </RelativeLayout>
+
     <LinearLayout
         android:layout_below="@id/rl0"
         android:layout_width="match_parent"
@@ -81,79 +79,77 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent">
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/tv_zhishi"
                     android:layout_width="65dp"
                     android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/shape_roundrectangle">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:textSize="13dp"
-                        android:textColor="@color/textblack"
-                        android:text="知食"/>
+                    android:background="@drawable/shape_roundrectangle"
+                    android:layout_centerInParent="true"
+                    android:textSize="13dp"
+                    android:textColor="@color/textblack"
+                    android:text="知食"
+                    android:gravity="center"/>
 
-                </RelativeLayout>
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent">
-                <RelativeLayout
+
+                <TextView
+                    android:id="@+id/tv_dianji"
                     android:layout_width="65dp"
                     android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/shape_roundrectangle">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:textSize="13dp"
-                        android:textColor="@color/textblack"
-                        android:text="店记"/>
+                    android:background="@drawable/shape_roundrectangle"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:textSize="13dp"
+                    android:textColor="@color/textblack"
+                    android:text="店记"/>
 
-                </RelativeLayout>
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent">
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/tv_chengshi"
                     android:layout_width="65dp"
                     android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/shape_roundrectangle">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:textSize="13dp"
-                        android:textColor="@color/textblack"
-                        android:text="城事"/>
+                    android:background="@drawable/shape_roundrectangle"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:textSize="13dp"
+                    android:textColor="@color/textblack"
+                    android:text="城事"/>
 
-                </RelativeLayout>
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent">
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/tv_yihui"
                     android:layout_width="65dp"
                     android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/shape_roundrectangle">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:textSize="13dp"
-                        android:textColor="@color/textblack"
-                        android:text="艺荟"/>
+                    android:background="@drawable/shape_roundrectangle"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:textSize="13dp"
+                    android:textColor="@color/textblack"
+                    android:text="艺荟"/>
 
-                </RelativeLayout>
             </RelativeLayout>
+
         </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -167,17 +163,26 @@
                 android:textColor="@color/gray_one_fives_three"
                 android:text="最近搜索"/>
             <ImageView
+                android:id="@+id/iv_clear_history"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/icon_delete"
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
+
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_record"
+            android:id="@+id/rv_history"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_result"
+        android:layout_below="@id/rl0"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     
 
 </RelativeLayout>

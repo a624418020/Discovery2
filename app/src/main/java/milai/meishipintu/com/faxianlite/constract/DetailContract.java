@@ -12,18 +12,18 @@ import milai.meishipintu.com.faxianlite.view.BasicView;
 public interface DetailContract {
 
     interface IPresenter extends BasicPresenter {
-        //获取商品详情
-        void getActivityInfo(int index);
 
         //添加收藏
-        void addWant(int index);
+        void addWant(String uid,String activityId);
 
+        //参加活动
+        void participate();
     }
 
     interface IView extends BasicView {
 
-        //显示商品详情
-        void showActivity();
+        //收藏成功
+        void onWantSuccess();
     }
 
 }

@@ -88,6 +88,7 @@
                     android:layout_marginBottom="10sp"/>
                 <TextView
                     android:layout_below="@id/tv_name"
+                    android:id="@+id/tv_prompt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="记得安排好时间哦"
@@ -114,7 +115,8 @@
             <ImageView
                 android:id="@+id/iv_Commodity_image"
                 android:layout_width="75.3dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
             <LinearLayout
                 android:layout_marginLeft="111dp"
                 android:layout_width="match_parent"

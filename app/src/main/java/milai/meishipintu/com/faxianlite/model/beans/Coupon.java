@@ -53,6 +53,7 @@ public class Coupon implements Serializable {
     private String applet_content;
     private String phone;
     private List<String> shop_names;
+    private String coupon_sn;
 
     public String getId() {
         return id;
@@ -412,6 +413,14 @@ public class Coupon implements Serializable {
 
     public void setShop_names(List<String> shop_names) {
         this.shop_names = shop_names;
+    }
+
+    public String getCoupon_sn() {
+        return coupon_sn;
+    }
+
+    public void setCoupon_sn(String coupon_sn) {
+        this.coupon_sn = coupon_sn;
     }
 
     @Override

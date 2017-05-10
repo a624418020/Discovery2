@@ -6,7 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import milai.meishipintu.com.faxianlite.constract.ParticipateContract;
-import milai.meishipintu.com.faxianlite.model.beans.Order;
+import milai.meishipintu.com.faxianlite.model.Retrofit.NetApi;
+import milai.meishipintu.com.faxianlite.model.beans.Collection;
+import milai.meishipintu.com.faxianlite.model.beans.Red;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by Administrator on 2017/4/28 0028.
@@ -15,9 +21,15 @@ import milai.meishipintu.com.faxianlite.model.beans.Order;
 public class ParticipatePresenter implements ParticipateContract.IPresenter{
 
     private ParticipateContract.IView view;
+    private List<Collection> collection;
+    private List<Red> red;
+    private NetApi netApi;
+    private CompositeSubscription subscriptions;
 
     public ParticipatePresenter(ParticipateContract.IView iView){
         view = iView;
+        subscriptions = new CompositeSubscription();
+
     }
 
 
@@ -26,26 +38,63 @@ public class ParticipatePresenter implements ParticipateContract.IPresenter{
 
     }
 
+
     @Override
-    public void getData(int type) {
-        List<Order> list = new ArrayList<>();
-        for(int i=0;i<5;i++){
-            Order order=new Order();
-            order.setPeople_name("李忠");
-            order.setPeople_phone("18115168206");
-            order.setPeople_address("南京 浦口 浦东");
-            order.setCommodity_image("http://b.milaipay.com/Public/Uploads/applet/58fda4915ed75.jpg");
-            order.setCommodity_title("日本设计师井上保美的");
-            order.setCommodity_subtitle("卖衣服");
-            order.setCommodity_value("199*1");
-            order.setCommodity_amount("1");
-            order.setStar_time("03月02");
-            order.setEnd_time("04月26");
-            order.setUser_name("阿呆");
-            order.setUser_phone("13888888888");
-            list.add(order);
-        }
-        Log.i("aaaaa",list.size()+"");
-        view.showData(list);
+    public void getData(String uid) {
+        collection=new ArrayList<>();
+        netApi= NetApi.getInstance();
+        subscriptions.add(netApi.getActivityList(uid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Collection>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("a",e+"");
+
+                    }
+
+                    @Override
+                    public void onNext(List<Collection> list) {
+                        view.showData(list);
+
+                    }
+                })
+        );
+
     }
+    public void getCouponInfo(String news_id){
+        red=new ArrayList<>();
+        netApi=NetApi.getInstance();
+        subscriptions.add(netApi.getActivityInformation(news_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Red>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("a",e+"");
+                    }
+
+                    @Override
+                    public void onNext(List<Red> reds) {
+                        Log.i("a","成功");
+                        red.addAll(reds);
+                        view.showCouponInfo(reds);
+                    }
+                })
+
+        );
+
+
+    }
+
 }

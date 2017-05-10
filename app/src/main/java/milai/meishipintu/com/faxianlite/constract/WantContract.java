@@ -3,6 +3,8 @@ package milai.meishipintu.com.faxianlite.constract;
 import java.util.List;
 
 import milai.meishipintu.com.faxianlite.model.beans.Order;
+import milai.meishipintu.com.faxianlite.model.beans.Recommend;
+import milai.meishipintu.com.faxianlite.model.beans.WantItem;
 import milai.meishipintu.com.faxianlite.presenter.BasicPresenter;
 import milai.meishipintu.com.faxianlite.view.BasicView;
 
@@ -16,15 +18,21 @@ public interface WantContract {
 
     interface IPresenter extends BasicPresenter {
 
-        void getWantList();
+        void getWantList(String uid);
 
-        void deletWant(int[] deletNum);
+        void deletWant(String uid, int acitivityId);
+
+        void getRecomendInfo(int id);
     }
 
     interface IView extends BasicView{
 
-        void showWantList(List<Order> orderList);
+        void showWantList(List<WantItem> wantList);
 
-        void reFreshList();
+        void onRecommedInfoGet(Recommend recommend);
+
+        void onDeletSuccess();
+
+        void onDeletFaild();
     }
 }

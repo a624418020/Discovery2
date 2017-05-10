@@ -1,12 +1,19 @@
 package milai.meishipintu.com.faxianlite.presenter;
 
 import android.content.pm.PackageInfo;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import milai.meishipintu.com.faxianlite.constract.DetailContract;
+import milai.meishipintu.com.faxianlite.model.Retrofit.NetApi;
 import milai.meishipintu.com.faxianlite.model.beans.Order;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by Administrator on 2017/4/26 0026.
@@ -15,45 +22,50 @@ import milai.meishipintu.com.faxianlite.model.beans.Order;
 public class DetailsPresenter implements DetailContract.IPresenter {
 
     private DetailContract.IView detailsViewInterface;
-    private List<Order>list;
+    private NetApi netApi;
+    private CompositeSubscription subscriptions;
 
     public DetailsPresenter(DetailContract.IView detailsViewInterface){
         this.detailsViewInterface=detailsViewInterface;
-    }
-    public void getdata(){
-        list=new ArrayList<>();
-        Order order=new Order();
-        order.setPeople_name("李忠");
-        order.setPeople_phone("18115168206");
-        order.setPeople_address("南京 浦口 浦东");
-        order.setCommodity_image("http://b.milaipay.com/Public/Uploads/applet/58fda4915ed75.jpg");
-        order.setCommodity_title("日本设计师井上保美的");
-        order.setCommodity_subtitle("卖衣服");
-        order.setCommodity_value("199*1");
-        order.setCommodity_amount("1");
-        order.setStar_time("03月02");
-        order.setEnd_time("04月26");
-        order.setUser_name("阿呆");
-        order.setUser_phone("13888888888");
-        list.add(order);
-        detailsViewInterface.showActivity();
+        netApi = NetApi.getInstance();
+        subscriptions = new CompositeSubscription();
     }
 
     //from DetailContract.IPresenter
     @Override
-    public void getActivityInfo(int index) {
+    public void participate() {
 
     }
 
     //from DetailContract.IPresenter
     @Override
-    public void addWant(int index) {
+    public void addWant(String uid, String activityId) {
+        subscriptions.add(netApi.addWant(activityId,uid).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onCompleted() {
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        detailsViewInterface.showError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        if (integer == 1) {
+                            detailsViewInterface.onWantSuccess();
+                        } else {
+                            detailsViewInterface.showError("添加收藏失败，请稍后重试");
+                        }
+                    }
+                }));
     }
 
     //from DetailContract.IPresenter
     @Override
     public void unsubscrib() {
-
+        subscriptions.clear();
     }
 }

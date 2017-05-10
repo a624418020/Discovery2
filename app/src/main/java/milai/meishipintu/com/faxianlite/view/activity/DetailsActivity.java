@@ -12,17 +12,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import milai.meishipintu.com.faxianlite.DiscoverApplication;
 import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.Tool.MScrollView;
 import milai.meishipintu.com.faxianlite.Tool.ObservableWebView;
+import milai.meishipintu.com.faxianlite.Tool.ToastUtils;
 import milai.meishipintu.com.faxianlite.constract.DetailContract;
-import milai.meishipintu.com.faxianlite.model.beans.Order;
 import milai.meishipintu.com.faxianlite.model.beans.Recommend;
 import milai.meishipintu.com.faxianlite.presenter.DetailsPresenter;
 
@@ -43,7 +41,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailContract
     MScrollView scrollview;
     @BindView(R.id.button)
     LinearLayout button;
-    private List<Order> list;
+
     private DetailContract.IPresenter mPresenter;
     private Recommend recommend;
     private ObservableWebView mwebview;
@@ -55,18 +53,16 @@ public class DetailsActivity extends AppCompatActivity implements DetailContract
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
-        list = new ArrayList<>();
         //获取商品信息
         mPresenter = new DetailsPresenter(this);
-        mPresenter.getActivityInfo(0);
         //发现页面跳转带过来的ID
         recommend = (Recommend) getIntent().getSerializableExtra("Recommend");
         Log.i("recommend", recommend.toString());
         Toast.makeText(getApplicationContext(), recommend.getTitle() + "跳转过来的参数", Toast.LENGTH_SHORT).show();
-        web(savedInstanceState, recommend);
+        initWeb(savedInstanceState, recommend);
     }
 
-    private void web(Bundle savedInstanceState, Recommend recommend) {
+    private void initWeb(Bundle savedInstanceState, Recommend recommend) {
         tvTitle.setText("商品详情");
         title.setText(recommend.getTitle());
         tvTime.setText(recommend.getDate());
@@ -100,14 +96,13 @@ public class DetailsActivity extends AppCompatActivity implements DetailContract
         });
     }
 
-
     @OnClick({R.id.bt_want, R.id.bt_join, R.id.bt_return})
     public void onClick(View view) {
         Intent intent ;
         switch (view.getId()) {
             case R.id.bt_want:
-                //Intent传递参数
-
+                Log.d("DetailActivity", "uid:" + DiscoverApplication.getUser().getUid() + ",id:" + recommend.getId());
+                mPresenter.addWant(DiscoverApplication.getUser().getUid(), recommend.getId());
                 break;
             case R.id.bt_join:
                 //Intent传递参数
@@ -119,18 +114,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailContract
                 break;
             case R.id.bt_return: {
                 finish();
-
             }
-        }
-    }
-
-
-    //Web视图
-    private class HelloWebViewClient extends WebViewClient {
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            return true;
         }
     }
 
@@ -143,13 +127,13 @@ public class DetailsActivity extends AppCompatActivity implements DetailContract
     //from DetailContract.IView
     @Override
     public void showError(String err) {
-
+        ToastUtils.show(this, err, true);
     }
 
     //from DetailContract.IView
     @Override
-    public void showActivity() {
-
+    public void onWantSuccess() {
+        ToastUtils.show(this, "收藏成功", true);
     }
 
     @Override

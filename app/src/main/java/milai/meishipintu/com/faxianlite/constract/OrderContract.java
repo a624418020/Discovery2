@@ -22,12 +22,13 @@ public interface OrderContract {
 
         //参与活动
         void paticipate(String uniqid, String bundleid, String mobile);
+
     }
 
     interface IView extends BasicView{
 
         void showCouponInfo(List<Red> list);
 
-        void onPaticipateSucess(Coupon coupon);
+        void onPaticipateSucess(Coupon coupon,String onerror);
     }
 }

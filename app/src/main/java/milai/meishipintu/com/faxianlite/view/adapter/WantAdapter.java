@@ -6,122 +6,83 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+
 import java.util.List;
 
+import butterknife.BindView;
 import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.Tool.CanScrollItemView;
+import milai.meishipintu.com.faxianlite.Tool.ChooseHeadViewDialog;
+import milai.meishipintu.com.faxianlite.model.beans.WantItem;
+import milai.meishipintu.com.faxianlite.view.activity.OnItemClickListener;
+import milai.meishipintu.com.faxianlite.view.activity.WantActivity;
 
 /**
  * Created by tangyangkai on 16/6/12.
  */
 
 
-public class WantAdapter extends RecyclerView.Adapter<WantedViewHolder> implements CanScrollItemView.IonSlidingButtonListener {
+public class WantAdapter extends RecyclerView.Adapter<WantedViewHolder>  {
 
     private Context mContext;
-    private IonSlidingViewClickListener mIDeleteBtnClickListener;
-    private List<String> mDatas = new ArrayList<String>();
-    private CanScrollItemView mMenu = null;
+    private List<WantItem> mData;
+    private RequestManager requestManager;
+    private OnItemClickListener listenter;
 
-    public WantAdapter(Context context) {
+    public WantAdapter(Context context, List<WantItem> wantItemList) {
         mContext = context;
-        mIDeleteBtnClickListener = (IonSlidingViewClickListener) context;
-        for (int i = 0; i < 20; i++) {
-            mDatas.add("第"+i+"个测试");
-        }
-    }
-
-    public void updateData( List<String> mDatas){
-        this.mDatas = mDatas;
-        notifyDataSetChanged();
+        mData = wantItemList;
+        requestManager = Glide.with(mContext);
+        this.listenter = (OnItemClickListener) mContext;
     }
 
     @Override
     public int getItemCount() {
-        return mDatas.size();
+        return mData.size();
     }
 
     @Override
     public WantedViewHolder onCreateViewHolder(ViewGroup arg0, int arg1) {
-        CanScrollItemView view = (CanScrollItemView) LayoutInflater.from(mContext).inflate(R.layout.item_want_recycler, arg0, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_want, arg0, false);
         WantedViewHolder holder = new WantedViewHolder(view);
-        view.setSlidingButtonListener(this);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(final WantedViewHolder holder, final int position) {
-        holder.textView.setText(mDatas.get(position));
-        //设置内容布局的宽为屏幕宽度
-        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
-        int width = wm.getDefaultDisplay().getWidth();
-        holder.layout_content.getLayoutParams().width = width;
-        holder.textView.setOnClickListener(new View.OnClickListener() {
+        final int positionNow = position;
+        final WantItem wantItem = mData.get(position);
+        holder.tvTitle.setText(wantItem.getTitle());
+        requestManager.load("http://" + wantItem.getLogo()).error(R.drawable.default_samll_square).into(holder.commodityImage);
+        holder.btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //判断是否有删除菜单打开
-                if (menuIsOpen()) {
-                    closeMenu();//关闭菜单
-                } else {
-                    int n = holder.getLayoutPosition();
-                    mIDeleteBtnClickListener.onItemClick(v, n);
-                }
+                listenter.onItemRemove(positionNow);
             }
         });
-        holder.btn_Delete.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                mIDeleteBtnClickListener.onDeleteBtnCilck(v, position);
-                mDatas.remove(position);
-                WantAdapter.this.notifyItemRemoved(position);
-                WantAdapter.this.notifyItemChanged(position, mDatas.size() - position);
+                listenter.onItemClick(wantItem);
             }
         });
+//        holder.tvDelete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mData.remove(position);
+//                WantAdapter.this.notifyItemRemoved(position);
+//                WantAdapter.this.notifyItemChanged(position, mData.size() - position);
+//            }
+//        });
     }
 
-    @Override
-    public void onMenuIsOpen(View view) {
-        mMenu = (CanScrollItemView) view;
-    }
-    /**
-     * 滑动或者点击了Item监听
-     * @param canScrollItemView
-     */
-    @Override
-    public void onDownOrMove(CanScrollItemView canScrollItemView) {
-        if(menuIsOpen()){
-            if(mMenu != canScrollItemView){
-                closeMenu();
-            }
-        }
-
+    public void remove(WantItem wantItem) {
+        mData.remove(wantItem);
+        ;
     }
 
-    public void removeData(int position){
-        mDatas.remove(position);
-        notifyItemRemoved(position);
-    }
-
-    /**     * 关闭菜单     */
-    public void closeMenu() {
-        mMenu.closeMenu();
-        mMenu = null;
-    }
-
-    /**     * 判断是否有菜单打开     */
-    public Boolean menuIsOpen() {
-        if(mMenu != null){
-            return true;
-        }
-        return false;
-    }
-
-    public interface IonSlidingViewClickListener {
-
-        void onItemClick(View view, int position);
-
-        void onDeleteBtnCilck(View view, int position);
-    }
 }

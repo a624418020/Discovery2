@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import milai.meishipintu.com.faxianlite.DiscoverApplication;
 import milai.meishipintu.com.faxianlite.constract.OrderContract;
 import milai.meishipintu.com.faxianlite.model.Retrofit.NetApi;
 import milai.meishipintu.com.faxianlite.model.beans.Coupon;
@@ -24,7 +25,6 @@ public class OrderPresenter implements OrderContract.IPresenter {
     private Red luckymoney;
     private CompositeSubscription subscriptions;
     private NetApi netApi;
-    private Coupon mcoupon;
     private String onerror;
 
     public OrderPresenter(OrderContract.IView orderViewInterface){
@@ -60,8 +60,8 @@ public class OrderPresenter implements OrderContract.IPresenter {
         );
 
 
-
     }
+
 
     //from OrderContract.IPresenter
     @Override
@@ -79,14 +79,41 @@ public class OrderPresenter implements OrderContract.IPresenter {
                     @Override
                     public void onError(Throwable e) {
                         onerror=e.toString();
+                        orderViewInterface.onPaticipateSucess(null,onerror);
                         Log.i("bb",onerror+"");
                     }
 
                     @Override
                     public void onNext(Coupon coupon) {
                         Log.i("bb","成功");
-                        mcoupon=coupon;
-                        orderViewInterface.onPaticipateSucess(mcoupon);
+                        Collection(coupon);
+                    }
+                })
+        );
+    }
+    public void Collection(final Coupon coupon){
+        netApi=NetApi.getInstance();
+        subscriptions.add(netApi.participate(DiscoverApplication.getUser().getUid(),"153",coupon.getCoupon_sn())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Red>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("onError",e.toString());
+                        Log.i("getUid",DiscoverApplication.getUser().getUid());
+
+                    }
+
+                    @Override
+                    public void onNext(List<Red> list) {
+                        Log.i("Uid",DiscoverApplication.getUser().getUid());
+                        orderViewInterface.onPaticipateSucess(coupon,null);
+
                     }
                 })
         );

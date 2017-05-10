@@ -65,7 +65,6 @@ public class DiscoverFragment extends Fragment implements DiscoverContract.IView
         PagingScrollHelper scrollHelper = new PagingScrollHelper();
         vDividerItemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
         vLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-
         intent = new Intent();
         data = new ArrayList<>();
         recyclerView.setLayoutManager(vLinearLayoutManager);

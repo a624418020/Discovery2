@@ -11,7 +11,7 @@
         <RelativeLayout
             android:id="@+id/layout_content"
             android:layout_width="match_parent"
-            android:layout_height="106dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center">
             <ImageView
                 android:id="@+id/commodity_image"
@@ -35,35 +35,33 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray_one_fives_three"
-                    android:layout_marginTop="9dp"
-                    android:text="丹宁牛仔外套女款"/>
+                    android:layout_marginTop="9dp" />
                 <TextView
-                    android:id="@+id/text"
+                    android:id="@+id/tv_value"
                     android:layout_alignParentBottom="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#CD9E64"
                     android:layout_marginTop="5dp"
                     android:gravity="bottom"
-                    android:textSize="14sp"
-                    android:text="199 元 "/>
-                <RelativeLayout
-                    android:id="@+id/bt_collection"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bt_cancel"
                     android:layout_width="74dp"
                     android:layout_height="24dp"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:background="@drawable/shape_corner_red">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:textColor="#FE0D14"
-                        android:textSize="12sp"
-                        android:text="取消收藏"/>
-                </RelativeLayout>
+                    android:background="@drawable/shape_corner_red"
+                    android:layout_centerInParent="true"
+                    android:textColor="#FE0D14"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:text="取消收藏"/>
+
             </RelativeLayout>
         </RelativeLayout>
+
         <TextView
             android:id="@+id/tv_delete"
             android:layout_width="45dp"
@@ -74,5 +72,6 @@
             android:gravity="center"
             android:text="删 除"
             android:textColor="#DDFFFFFF"/>
+
     </RelativeLayout>
 </milai.meishipintu.com.faxianlite.Tool.CanScrollItemView>

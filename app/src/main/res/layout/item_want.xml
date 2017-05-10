@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="106dp"
+    android:paddingTop="13dp"
+    android:paddingBottom="13dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:background="@android:color/white">
+    <RelativeLayout
+        android:id="@+id/layout_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+        <ImageView
+            android:id="@+id/iv_select"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="14dp"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/commodity_image"
+            android:layout_toRightOf="@id/iv_select"
+            android:scaleType="centerCrop"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/default_samll_square"/>
+        <RelativeLayout
+            android:layout_toRightOf="@id/commodity_image"
+            android:layout_marginLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13dp"
+                android:textColor="@color/textblack"
+                android:text="日本设计师井上保美的穿衣..."/>
+            <TextView
+                android:id="@+id/tv_subtitle"
+                android:layout_below="@id/tv_title"
+                android:layout_alignLeft="@id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_one_fives_three"
+                android:layout_marginTop="9dp" />
+            <TextView
+                android:id="@+id/tv_value"
+                android:layout_alignLeft="@id/tv_title"
+                android:layout_below="@id/tv_subtitle"
+                android:layout_marginTop="23dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#CD9E64"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/bt_cancel"
+                android:layout_width="74dp"
+                android:layout_height="24dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/shape_corner_red"
+                android:layout_centerInParent="true"
+                android:textColor="#FE0D14"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:text="取消收藏"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!--<TextView-->
+        <!--android:id="@+id/tv_delete"-->
+        <!--android:layout_width="45dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_toRightOf="@+id/layout_content"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:background="#000000"-->
+        <!--android:gravity="center"-->
+        <!--android:text="删 除"-->
+        <!--android:textColor="#DDFFFFFF"/>-->
+
+</RelativeLayout>
