@@ -67,4 +67,14 @@ public class DateUtil {
         String format = simpleDateFormat.format(new Date(Long.parseLong(comment_time) * 1000));
         return format;
     }
+
+    //显示时间格式为yyyy-MM-dd
+    public static String formart4 (String comment_time) {
+        if (comment_time == null) {
+            return "";
+        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String format = simpleDateFormat.format(new Date(Long.parseLong(comment_time) * 1000));
+        return format;
+    }
 }

@@ -57,8 +57,9 @@ public class DiscoverSubtitleAdapter extends RecyclerView.Adapter< DiscoverSubti
     public void onBindViewHolder(DiscoverSubtitleViewHolder holder, final int position) {
         this.position=position;
         final Recommend recommend = list.get(position);
-        Glide.with(context).
-                load(recommend.getLogo()).
+        manager.load(recommend.getLogo()).
+                placeholder(R.drawable.default_big_rec).
+                error(R.drawable.default_big_rec).
                 into(holder.ivimage);//显示到目标View中
         Log.i("image",recommend.getLogo());
         holder.subtitle.setText(recommend.getTitle());

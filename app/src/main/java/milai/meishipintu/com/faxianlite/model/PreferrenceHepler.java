@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -130,9 +131,15 @@ public class PreferrenceHepler {
     public static List<String> loadSearchHistory() {
         SharedPreferences sharePreference = getSharePreference();
         String history = sharePreference.getString("history", "");
-        String[] split = history.split(",");
-        Log.d("Preferrence", "history:" + Arrays.toString(split));
-        return Arrays.asList(split);
+        List<String> result = new ArrayList<>();
+        if (!history.equals("")) {
+            String[] split = history.split(",");
+            Log.d("Preferrence", "history:" + Arrays.toString(split));
+            for (String item : split) {
+                result.add(item);
+            }
+        }
+        return result;
     }
 
     public static void clearHistory() {

@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
@@ -101,7 +102,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.IV
     }
 
 
-    @OnClick({R.id.bt_verify, R.id.bt_login, R.id.bt_passwordlogin, R.id.bt_weichat_login})
+    @OnClick({R.id.bt_verify, R.id.bt_login, R.id.bt_passwordlogin, R.id.bt_weichat_login, R.id.bt_close})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_verify:
@@ -131,6 +132,9 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.IV
                 break;
             case R.id.bt_weichat_login:
                 mPresenter.loginWeiChat();
+                break;
+            case R.id.bt_close:
+                onBackPressed();
                 break;
         }
     }

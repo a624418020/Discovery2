@@ -5,16 +5,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import milai.meishipintu.com.faxianlite.R;
+import milai.meishipintu.com.faxianlite.Tool.Immersive;
 import milai.meishipintu.com.faxianlite.Tool.StringUtils;
 import milai.meishipintu.com.faxianlite.Tool.ToastUtils;
 import milai.meishipintu.com.faxianlite.constract.SearchContract;
@@ -41,24 +47,25 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Immersive.immersive(0xff212121, this);
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
         mPresenter = new SearchPresenter(this);
         mPresenter.loadHistory();
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_SEARCH) {
-            String search = etSearch.getText().toString();
-            if (StringUtils.isNullOrEmpty(search)) {
-                showError("搜索内容不能为空");
-            } else {
-                mPresenter.doSearch(search);
-                mPresenter.addToHistory(history, search);
+        //添加软键盘按键监听
+        etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                String search = etSearch.getText().toString();
+                if (StringUtils.isNullOrEmpty(search)) {
+                    ToastUtils.show(SearchActivity.this, R.string.err_search_empty, true);
+                } else {
+                    mPresenter.addToHistory(history,search);
+                    mPresenter.doSearch(search);
+                }
+                return false;
             }
-        }
-        return super.onKeyDown(keyCode, event);
+        });
     }
 
 
@@ -69,7 +76,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
                 onBackPressed();
                 break;
             case R.id.et_search:
-                if (rvResult.isShown()) {
+                if (rvResult.getVisibility()==View.VISIBLE) {
                     rvResult.setVisibility(View.GONE);
                 }
                 break;
@@ -83,7 +90,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
                 mPresenter.doSearch("城事");
                 break;
             case R.id.tv_yihui:
-                mPresenter.doSearch("艺荟");
+                mPresenter.doSearch("艺会");
                 break;
             case R.id.iv_clear_history:
                 mPresenter.clearHistory();
@@ -103,6 +110,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         if (historyAdapter == null) {
             history = historys;
             historyAdapter = new HistoryAdapter(this, history);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
             rvHistory.setLayoutManager(new LinearLayoutManager(this));
             rvHistory.setItemAnimator(new DefaultItemAnimator());
             rvHistory.setAdapter(historyAdapter);
@@ -117,7 +125,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     @Override
     public void onSearchInfoGet(List<Recommend> result) {
         //刷新搜索记录
-        mPresenter.loadHistory();
+        historyAdapter.notifyDataSetChanged();
         //结果页显示
         rvResult.setVisibility(View.VISIBLE);
         if (searchAdapter == null) {
@@ -142,6 +150,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mPresenter.saveHistory(history);
         mPresenter.unsubscrib();
     }
 

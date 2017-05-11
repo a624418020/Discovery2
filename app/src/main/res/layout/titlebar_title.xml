@@ -43,7 +43,7 @@
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:background="@color/gray_twenty_one_six"
         android:layout_alignParentBottom="true"/>
 

@@ -8,6 +8,9 @@
     android:paddingRight="20dp"
     android:background="@color/white"
     tools:context="milai.meishipintu.com.faxianlite.view.activity.RegisteredActivity">
+    <include
+        layout="@layout/titlebar_close"/>
+
     <RelativeLayout
         android:id="@+id/rl01"
         android:layout_width="match_parent"

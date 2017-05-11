@@ -1,5 +1,6 @@
 package milai.meishipintu.com.faxianlite.presenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import milai.meishipintu.com.faxianlite.constract.SearchContract;
@@ -32,13 +33,13 @@ public class SearchPresenter implements SearchContract.IPresenter {
     @Override
     public void loadHistory() {
         List<String> strings = PreferrenceHepler.loadSearchHistory();
-//        iView.onHistoryGet(strings);
+        iView.onHistoryGet(strings);
     }
 
     @Override
     public void clearHistory() {
         PreferrenceHepler.clearHistory();
-//        iView.onHistoryGet(new ArrayList<String>());
+        iView.onHistoryGet(new ArrayList<String>());
     }
 
     @Override
@@ -63,10 +64,16 @@ public class SearchPresenter implements SearchContract.IPresenter {
                 }));
     }
 
+    //只改变内存中历史记录，待退出时再保存在SharePreference中
     @Override
     public void addToHistory(List<String> history, String content) {
         history.remove(content);
         history.add(0, content);
+    }
+
+    @Override
+    public void saveHistory(List<String> history) {
+        PreferrenceHepler.saveSearchHistory(history);
     }
 
     @Override

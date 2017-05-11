@@ -19,6 +19,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:id="@+id/rl_01"
                 android:layout_width="wrap_content"
@@ -65,12 +66,14 @@
                 </LinearLayout>
 
             </RelativeLayout>
+
             <milai.meishipintu.com.faxianlite.Tool.ObservableWebView
                 android:id="@+id/wv_article"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="8dp"
                 android:layout_marginRight="8dp">
+
             </milai.meishipintu.com.faxianlite.Tool.ObservableWebView>
         </LinearLayout>
     </milai.meishipintu.com.faxianlite.Tool.MScrollView>

@@ -23,10 +23,10 @@ public class RecommendViewHolder extends RecyclerView.ViewHolder {
     RelativeLayout rl;
     @BindView(R.id.title)
     TextView title;
-    @BindView(R.id.designer)
-    TextView designer;
-    @BindView(R.id.name)
-    TextView name;
+//    @BindView(R.id.designer)
+//    TextView designer;
+//    @BindView(R.id.name)
+//    TextView name;
 
     public RecommendViewHolder(View itemView) {
         super(itemView);

@@ -1,16 +1,15 @@
 package milai.meishipintu.com.faxianlite.view.activity;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,6 +18,7 @@ import milai.meishipintu.com.faxianlite.DiscoverApplication;
 import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.Tool.MScrollView;
 import milai.meishipintu.com.faxianlite.Tool.ObservableWebView;
+import milai.meishipintu.com.faxianlite.Tool.StringUtils;
 import milai.meishipintu.com.faxianlite.Tool.ToastUtils;
 import milai.meishipintu.com.faxianlite.constract.DetailContract;
 import milai.meishipintu.com.faxianlite.model.beans.Recommend;
@@ -40,12 +40,12 @@ public class DetailsActivity extends AppCompatActivity implements DetailContract
     @BindView(R.id.scrollview)
     MScrollView scrollview;
     @BindView(R.id.button)
-    LinearLayout button;
+    LinearLayout llBottom;
 
     private DetailContract.IPresenter mPresenter;
     private Recommend recommend;
     private ObservableWebView mwebview;
-    private boolean show=true;
+    private boolean show = true;            //默认底部显现
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +53,16 @@ public class DetailsActivity extends AppCompatActivity implements DetailContract
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
+        tvTitle.setText(R.string.app);
         //获取商品信息
         mPresenter = new DetailsPresenter(this);
         //发现页面跳转带过来的ID
         recommend = (Recommend) getIntent().getSerializableExtra("Recommend");
         Log.i("recommend", recommend.toString());
-        Toast.makeText(getApplicationContext(), recommend.getTitle() + "跳转过来的参数", Toast.LENGTH_SHORT).show();
         initWeb(savedInstanceState, recommend);
+        if (StringUtils.isNullOrEmptOrZero(recommend.getActivity_id())) {
+            llBottom.setVisibility(View.GONE);
+        }
     }
 
     private void initWeb(Bundle savedInstanceState, Recommend recommend) {
@@ -82,18 +85,39 @@ public class DetailsActivity extends AppCompatActivity implements DetailContract
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         scrollview.setOnScrollChangedCallback(new MScrollView.OnScrollChangedCallback() {
             @Override
-            public void onScroll(boolean direction) {
-                if(show!=direction){ //防止滚动时一直触发
-                    if (direction) {
-                        button.setVisibility(View.VISIBLE);
-                        show=direction;
-                    } else {
-                        button.setVisibility(View.INVISIBLE);
-                        show=direction;
-                    }
+            public void onScroll(boolean shouldShow) {
+                if (show != shouldShow) { //防止滚动时一直触发
+                    //启动动画
+                    startAnimationUpOrDown(llBottom, shouldShow);
+                    //更新状态值
+                    show = shouldShow;
+                }
+            }
+
+            @Override
+            public void onReachBottom() {
+                if (!show) {
+                    //启动动画
+                    startAnimationUpOrDown(llBottom, true);
+                    //更新状态值
+                    show = true;
                 }
             }
         });
+    }
+
+    //播放上下滑动画
+    private void startAnimationUpOrDown(LinearLayout llBottom, boolean isUp) {
+        Log.d("DetailActivity", "onAnimatiion start");
+        int height = llBottom.getHeight();
+        ObjectAnimator translationY;
+        if (isUp) {
+            translationY = ObjectAnimator.ofFloat(llBottom, "translationY", height, 0f);
+        } else {
+            translationY = ObjectAnimator.ofFloat(llBottom, "translationY", 0f, height);
+        }
+        translationY.setDuration(300);
+        translationY.start();
     }
 
     @OnClick({R.id.bt_want, R.id.bt_join, R.id.bt_return})

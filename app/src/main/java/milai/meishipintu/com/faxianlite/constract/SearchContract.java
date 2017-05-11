@@ -24,6 +24,8 @@ public interface SearchContract {
 
         void addToHistory(List<String> history, String content);
 
+        void saveHistory(List<String> history);
+
     }
 
     interface IView extends BasicView {

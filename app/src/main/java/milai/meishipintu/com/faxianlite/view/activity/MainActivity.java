@@ -19,6 +19,7 @@ import milai.meishipintu.com.faxianlite.Constant;
 import milai.meishipintu.com.faxianlite.DiscoverApplication;
 import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.Tool.Immersive;
+import milai.meishipintu.com.faxianlite.Tool.ToastUtils;
 import milai.meishipintu.com.faxianlite.view.fargment.DiscoverFragment;
 import milai.meishipintu.com.faxianlite.view.fargment.MineFragment;
 
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView ivMine;
     @BindView(R.id.tv_mine)
     TextView tvMine;
+
+    private long timeLast = 0l;
 
     private DiscoverFragment discoverFragment;
     private MineFragment mineFragment;
@@ -108,6 +111,19 @@ public class MainActivity extends AppCompatActivity {
                     tvRecommend.setEnabled(false);
                 }
                 break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //不允许返回
+        long timeNow = System.currentTimeMillis();
+        if (timeNow - timeLast < 2000) {
+            this.finish();
+        } else {
+            //两次点击超过2秒则不视为退出
+            ToastUtils.show(this, R.string.exit, true);
+            timeLast = timeNow;
         }
     }
 }

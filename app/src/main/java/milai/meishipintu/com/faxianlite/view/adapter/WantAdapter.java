@@ -51,7 +51,8 @@ public class WantAdapter extends RecyclerView.Adapter<WantedViewHolder>  {
         final int positionNow = position;
         final WantItem wantItem = mData.get(position);
         holder.tvTitle.setText(wantItem.getTitle());
-        requestManager.load("http://" + wantItem.getLogo()).into(holder.commodityImage);
+        requestManager.load("http://" + wantItem.getLogo()).placeholder(R.drawable.default_samll_square)
+                .error(R.drawable.default_samll_square).into(holder.commodityImage);
         holder.btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

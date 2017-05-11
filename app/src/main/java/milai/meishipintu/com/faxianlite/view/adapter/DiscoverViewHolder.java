@@ -26,10 +26,10 @@ public class DiscoverViewHolder extends RecyclerView.ViewHolder {
     RelativeLayout rl;
     @BindView(R.id.tv_title)
     TextView title;
-    @BindView(R.id.designer)
-    TextView designer;
-    @BindView(R.id.name)
-    TextView name;
+//    @BindView(R.id.designer)
+//    TextView designer;
+//    @BindView(R.id.name)
+//    TextView name;
 
     public DiscoverViewHolder(View itemView) {
         super(itemView);

@@ -7,27 +7,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import milai.meishipintu.com.faxianlite.DiscoverApplication;
 import milai.meishipintu.com.faxianlite.R;
-import milai.meishipintu.com.faxianlite.Tool.ChooseHeadViewDialog;
 import milai.meishipintu.com.faxianlite.constract.WantContract;
-import milai.meishipintu.com.faxianlite.model.beans.Order;
 import milai.meishipintu.com.faxianlite.model.beans.Recommend;
 import milai.meishipintu.com.faxianlite.model.beans.WantItem;
 import milai.meishipintu.com.faxianlite.presenter.WantPresenter;
 import milai.meishipintu.com.faxianlite.view.adapter.WantAdapter;
 
-public class WantActivity extends AppCompatActivity implements WantContract.IView,SwipeRefreshLayout.OnRefreshListener,OnItemClickListener {
+public class WantActivity extends AppCompatActivity implements WantContract.IView, SwipeRefreshLayout.OnRefreshListener, OnItemClickListener {
 
 
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
     private String TAG = "RecyclerViewDemo";
 
     @BindView(R.id.recycler_view)
@@ -43,6 +43,7 @@ public class WantActivity extends AppCompatActivity implements WantContract.IVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_want);
         ButterKnife.bind(this);
+        tvTitle.setText(R.string.want);
         mPresenter = new WantPresenter(this);
         initView();
     }
@@ -81,7 +82,7 @@ public class WantActivity extends AppCompatActivity implements WantContract.IVie
     public void onRecommedInfoGet(Recommend recommend) {
         Intent intent = new Intent(this, DetailsActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("Recommend",  recommend);
+        bundle.putSerializable("Recommend", recommend);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -129,4 +130,8 @@ public class WantActivity extends AppCompatActivity implements WantContract.IVie
     }
 
 
+    @OnClick(R.id.bt_return)
+    public void onViewClicked() {
+        onBackPressed();
+    }
 }

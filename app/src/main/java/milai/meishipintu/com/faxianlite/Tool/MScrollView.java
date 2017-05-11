@@ -34,7 +34,7 @@ public class MScrollView extends ScrollView {
 
     @Override
     protected void onScrollChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
+        super.onScrollChanged(w,h,oldw,oldh);
         if (oldh < h && ((h - oldh) > 15)) {// 向上
             Log.e("wangly", "距离："+(oldh < h) +"---"+(h - oldh));
             Log.d("TAG","向上滑动");
@@ -44,6 +44,10 @@ public class MScrollView extends ScrollView {
             Log.e("wangly", "距离："+(oldh > h) +"---"+(oldh - h));
             Log.d("TAG"," 向下滑动");
             mOnScrollChangedCallback.onScroll(true);
+        }
+
+        if (getChildAt(0).getMeasuredHeight() <= getScrollY() + getHeight()) {
+            mOnScrollChangedCallback.onReachBottom();
         }
     }
     public MScrollView.OnScrollChangedCallback getOnScrollChangedCallback() {
@@ -59,8 +63,10 @@ public class MScrollView extends ScrollView {
     /**
      * Impliment in the activity/fragment/view that you want to listen to the webview
      */
-    public static interface OnScrollChangedCallback {
-        public void onScroll(boolean direction);
+    public interface OnScrollChangedCallback {
+        void onScroll(boolean show);
+
+        void onReachBottom();
     }
 
 }

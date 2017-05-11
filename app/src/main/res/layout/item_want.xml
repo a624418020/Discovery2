@@ -26,8 +26,7 @@
             android:layout_toRightOf="@id/iv_select"
             android:scaleType="centerCrop"
             android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/default_samll_square"/>
+            android:layout_height="80dp" />
         <RelativeLayout
             android:layout_toRightOf="@id/commodity_image"
             android:layout_marginLeft="15dp"

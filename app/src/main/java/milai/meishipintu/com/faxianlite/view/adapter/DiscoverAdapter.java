@@ -57,6 +57,8 @@ public class DiscoverAdapter extends BetterRecyclerView.Adapter<DiscoverViewHold
         Log.d("adapter", "url:" + headRecommend.getLogo());
         Glide.with(context).
                 load(headRecommend.getLogo()).
+                placeholder(R.drawable.default_big_square).
+                error(R.drawable.default_big_square).
                 into(holder.ivMainimaget);//显示到目标View中
         Log.i("aa",headRecommend.getLogo());
         holder.itemView.setTag(headRecommend.getId());

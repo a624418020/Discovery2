@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="milai.meishipintu.com.faxianlite.view.activity.LoginOrLoginActivity">
     <ImageView
+        android:id="@+id/iv_back"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/pic_background"
@@ -51,11 +52,11 @@
         android:layout_height="match_parent"
         android:layout_below="@id/iv_01"
         android:layout_above="@id/rl_02">
-        <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:src="@drawable/login"/>-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/login"/>
     </RelativeLayout>
 
 </RelativeLayout>
