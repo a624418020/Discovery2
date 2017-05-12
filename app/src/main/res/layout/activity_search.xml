@@ -29,7 +29,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:layout_marginLeft="10dp"
-            android:layout_toLeftOf="@id/rl_03">
+            android:layout_toLeftOf="@id/back">
             <RelativeLayout
                 android:id="@+id/rl_02"
                 android:layout_width="27dp"

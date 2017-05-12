@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import java.util.List;
 
 import milai.meishipintu.com.faxianlite.model.beans.Collection;
-import milai.meishipintu.com.faxianlite.model.beans.CouponResult;
 import milai.meishipintu.com.faxianlite.model.beans.Recommend;
 import milai.meishipintu.com.faxianlite.model.beans.Red;
 import milai.meishipintu.com.faxianlite.model.beans.UserInfo;
@@ -60,11 +59,16 @@ public interface NetService {
 
     //抢红包
     @FormUrlEncoded
-    @POST("https://a.milaipay.com/wap/coupon/doreceive")
-    Observable<CouponResult> getCouponInformationHttp(@Nullable @Field("uniqid") String uniqid,
+    @POST("https://a.milaipay.com/mspt/Applet/doReceive_bundle")
+    Observable<ResponseBody> getCouponInformationHttp(@Nullable @Field("uniqid") String uniqid,
                                                       @Nullable @Field("bundle") String bundle,
                                                       @Nullable @Field("mobile") String mobile);
-
+    //抢红包
+    @FormUrlEncoded
+    @POST("https://a.milaipay.com/mspt/Applet/doReceive_uniqid")
+    Observable<ResponseBody> getCouponInformationUniqidHttp(@Nullable @Field("uniqid") String uniqid,
+                                                      @Nullable @Field("bundle") String bundle,
+                                                      @Nullable @Field("mobile") String mobile);
 
     //参与活动
     @FormUrlEncoded
@@ -110,4 +114,9 @@ public interface NetService {
     @FormUrlEncoded
     @POST("/Api/Api/applet_search")
     Observable<HttpResult<List<Recommend>>> searchHttp(@Field("content") String content);
+
+    //修改手机号
+    @FormUrlEncoded
+    @POST("")
+    Observable<ResponseBody> modifyTelHttp(@Field("uid") String uid, @Field("tel") String tel, @Field("verify") String verify);
 }

@@ -29,6 +29,7 @@ public class DiscoverAdapter extends BetterRecyclerView.Adapter<DiscoverViewHold
     private List<String> subtitle=new ArrayList<>();
     private Context context;
     private DiscoverSubtitleAdapter discoverSubtitleAdapter;
+    private int position;
 
     public DiscoverAdapter(Context context, List<RecommendPackage> list) {
         this.data = list;
@@ -49,6 +50,7 @@ public class DiscoverAdapter extends BetterRecyclerView.Adapter<DiscoverViewHold
         final Recommend headRecommend = data.get(position).getHeadRecommend();
         final List<Recommend> smallRecommends=data.get(position).getSmallRecommends();
         final RecyclerView recyclerView=holder.rvimages;
+        this.position=position;
         LinearLayoutManager mLayoutManager =
                 new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -75,10 +77,14 @@ public class DiscoverAdapter extends BetterRecyclerView.Adapter<DiscoverViewHold
         });
     }
 
+
     @Override
     public int getItemCount() {
         return data.size();
 
+    }
+    public int getposition() {
+        return position;
 
     }
 

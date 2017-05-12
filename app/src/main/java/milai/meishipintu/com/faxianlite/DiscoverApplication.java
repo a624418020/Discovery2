@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.tencent.bugly.Bugly;
 
+import cn.jpush.android.api.JPushInterface;
 import milai.meishipintu.com.faxianlite.model.PreferrenceHepler;
 import milai.meishipintu.com.faxianlite.model.beans.UserInfo;
 
@@ -35,7 +36,10 @@ public class DiscoverApplication extends Application {
         super.onCreate();
         instance = this;
         //初始化Bugly
-//        Bugly.init(getApplicationContext(), "a50e729142", true);
+        Bugly.init(getApplicationContext(), "a50e729142", true);
         user = PreferrenceHepler.getUser();
+        //初始化JPush
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 }

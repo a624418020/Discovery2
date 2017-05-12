@@ -20,6 +20,7 @@ public interface OrderContract {
         //获取活动信息
         void getCouponInfo(String id);
 
+        void paticipate_uniqid(String uniqid, String bundleid, String mobile);
         //参与活动
         void paticipate(String uniqid, String bundleid, String mobile);
 

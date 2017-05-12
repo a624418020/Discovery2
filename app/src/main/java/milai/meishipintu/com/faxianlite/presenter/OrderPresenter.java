@@ -64,6 +64,7 @@ public class OrderPresenter implements OrderContract.IPresenter {
 
 
     //from OrderContract.IPresenter
+    //抢券bundleid
     @Override
     public void paticipate(String uniqid, String bundleid, String mobile) {
         netApi=NetApi.getInstance();
@@ -78,9 +79,7 @@ public class OrderPresenter implements OrderContract.IPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        onerror=e.toString();
-                        orderViewInterface.onPaticipateSucess(null,onerror);
-                        Log.i("bb",onerror+"");
+                        orderViewInterface.showError(e.getMessage());
                     }
 
                     @Override
@@ -91,6 +90,33 @@ public class OrderPresenter implements OrderContract.IPresenter {
                 })
         );
     }
+    //抢券uniqid
+    @Override
+    public void paticipate_uniqid(String uniqid, String bundleid, String mobile) {
+        netApi=NetApi.getInstance();
+        subscriptions.add(netApi.getCouponInformationUniqidHttp(uniqid,bundleid,mobile)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Coupon>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        orderViewInterface.showError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Coupon coupon) {
+                        Log.i("bb","成功");
+                        Collection(coupon);
+                    }
+                })
+        );
+    }
+    //参与活动
     public void Collection(final Coupon coupon){
         netApi=NetApi.getInstance();
         subscriptions.add(netApi.participate(DiscoverApplication.getUser().getUid(),"153",coupon.getCoupon_sn())

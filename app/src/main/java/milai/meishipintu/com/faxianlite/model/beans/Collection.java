@@ -71,4 +71,17 @@ public class Collection implements Serializable {
     public void setSub_name(String sub_name) {
         this.sub_name = sub_name;
     }
+
+    @Override
+    public String toString() {
+        return "Collection{" +
+                "coupon_sn='" + coupon_sn + '\'' +
+                ", title='" + title + '\'' +
+                ", logo='" + logo + '\'' +
+                ", id='" + id + '\'' +
+                ", activity_id='" + activity_id + '\'' +
+                ", time='" + time + '\'' +
+                ", sub_name='" + sub_name + '\'' +
+                '}';
+    }
 }

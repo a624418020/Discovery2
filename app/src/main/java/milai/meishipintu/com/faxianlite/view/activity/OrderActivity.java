@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
@@ -17,6 +18,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import milai.meishipintu.com.faxianlite.DiscoverApplication;
 import milai.meishipintu.com.faxianlite.R;
 import milai.meishipintu.com.faxianlite.constract.OrderContract;
 import milai.meishipintu.com.faxianlite.model.beans.Coupon;
@@ -73,7 +75,7 @@ public class OrderActivity extends AppCompatActivity implements OrderContract.IV
         orderPresenter.getCouponInfo(161 + "");
     }
 
-    private void settext(Red red) {
+    private void settext() {
         if (red != null) {
             String url = "http://" + red.getCoupon().getShare_img();
             tvPeopleName.setText("未发现");
@@ -86,8 +88,8 @@ public class OrderActivity extends AppCompatActivity implements OrderContract.IV
             tvQuantity.setText("1");
             tvStarTime.setText(red.getStart_time() + "至" + red.getEnd_time());
         }
-
     }
+
 
     @OnClick({R.id.bt_return, R.id.bt_join})
     public void onClick(View view) {
@@ -96,7 +98,20 @@ public class OrderActivity extends AppCompatActivity implements OrderContract.IV
                 finish();
                 break;
             case R.id.bt_join:
-                orderPresenter.paticipate(null, "jcdkvy36", "18115168206");
+                String tel=DiscoverApplication.getUser().getTel();
+                if(tel==null||tel.length()!=11){
+                    Toast.makeText(this, "未获取到正确手机号码", Toast.LENGTH_SHORT);
+                }else {
+                    String bundle_key=red.getCoupon().getBundle_key();
+                    String uniqids=red.getCoupon().getUniqids();
+                    if(bundle_key==null||bundle_key.length()<2){
+                        orderPresenter.paticipate_uniqid(uniqids,null,tel);
+                    }else {
+                        orderPresenter.paticipate(null, bundle_key,tel);
+                    }
+
+                }
+
                 break;
         }
     }
@@ -104,6 +119,9 @@ public class OrderActivity extends AppCompatActivity implements OrderContract.IV
     //from OrderContract.IView
     @Override
     public void showError(String err) {
+        tvname.setText("参与失败");
+        tvprompt.setText(err);
+        rlSuccess.setVisibility(View.VISIBLE);
 
     }
 
@@ -111,19 +129,16 @@ public class OrderActivity extends AppCompatActivity implements OrderContract.IV
     @Override
     public void showCouponInfo(List<Red> list) {
         red = list.get(0);
-        settext(red);
+        settext();
         Log.i("News_id", list.get(0).getNews_id());
     }
 
     //from OrderContract.IView
     @Override
     public void onPaticipateSucess(Coupon coupon, String onerror) {
-        if (coupon != null && onerror == null) {
+        if (coupon != null ) {
 //            tvprompt.setText(coupon.getCouponShow());
             tvprompt.setText("记得安排好时间哦");
-        } else {
-            tvname.setText("参与失败");
-            tvprompt.setText(onerror);
         }
         rlSuccess.setVisibility(View.VISIBLE);
         Log.i("News_id", coupon.getName());

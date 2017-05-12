@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="milai.meishipintu.com.faxianlite">
+    package="milai.meishipintu.com.faxianlite"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <permission android:name="com.meishipintu.bankoa.permission.JPUSH_MESSAGE"
+    <permission android:name="milai.meishipintu.com.faxianlite.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature"/>
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.meishipintu.bankoa.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="milai.meishipintu.com.faxianlite.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
 
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
-    <!--<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
 
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
@@ -21,6 +20,23 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!--用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <!--用于申请调用A-GPS模块-->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <!--用于申请获取蓝牙信息进行室内定位-->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+
+    <!--特殊权限-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!--用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!--用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -140,6 +156,35 @@
                 android:resource="@xml/filepath" />
         </provider>
 
+
+        <!--umeng分享用-->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!--Bugly用-->
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <!--umeng-->
+        <meta-data android:name="UMENG_APPKEY" android:value="59151fe3f29d9825a5000258"/>
+
+        <!--高德定位Service-->
+        <service android:name="com.amap.api.location.APSService"></service>
+
+        <!--高德-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey" android:value="7b74938f3e4e29a834c046c33aa4eef6"/>
+
+        <!--JPush Service-->
+        <service android:name="cn.jpush.android.service.PushService"
+            android:process=":multiprocess"
+            tools:node="replace" />
     </application>
 
 </manifest>

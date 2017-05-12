@@ -3,6 +3,8 @@ package milai.meishipintu.com.faxianlite.model.Retrofit;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,7 +16,6 @@ import milai.meishipintu.com.faxianlite.Constant;
 import milai.meishipintu.com.faxianlite.Tool.StringUtils;
 import milai.meishipintu.com.faxianlite.model.beans.Collection;
 import milai.meishipintu.com.faxianlite.model.beans.Coupon;
-import milai.meishipintu.com.faxianlite.model.beans.CouponResult;
 import milai.meishipintu.com.faxianlite.model.beans.Recommend;
 import milai.meishipintu.com.faxianlite.model.beans.Red;
 import milai.meishipintu.com.faxianlite.model.beans.UserInfo;
@@ -79,16 +80,61 @@ public class NetApi {
         return observable.map(new MyResultFunc<List<Red>>());
     }
 
-    //抢券
+    //bundle抢券
     public Observable<Coupon> getCouponInformation(String uniqid,String bundle,String mobile){
-        return netService.getCouponInformationHttp(uniqid,bundle,mobile).map(new Func1<CouponResult,Coupon>() {
+
+        return netService.getCouponInformationHttp(uniqid,bundle,mobile).map(new Func1<ResponseBody, Coupon>() {
             @Override
-            public Coupon call(CouponResult couponResult) {
-                Log.i("couponResult",couponResult.toString());
-                if(couponResult.getStatus()!=1){
-                    throw new RuntimeException(couponResult.getInfo());
-                }else {
-                    return couponResult.getCoupon();
+            public Coupon call(ResponseBody responseBody) {
+                String data=null;
+                Gson gson = new Gson();
+                try {
+                    JSONObject jsonObject = new JSONObject(responseBody.string());
+
+                    if (1 == jsonObject.getInt("status")) {
+                        data=jsonObject.getString("data");
+                        Coupon coupon = gson.fromJson(data,Coupon.class);
+                        return coupon;
+                    } else {
+                        throw new RuntimeException(jsonObject.getString("msg"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("抢券失败，请稍后重试");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("抢券失败，请稍后重试");
+
+                }
+            }
+        });
+
+    }
+    //uniqid抢券
+    public Observable<Coupon> getCouponInformationUniqidHttp(String uniqid,String bundle,String mobile){
+
+        return netService.getCouponInformationHttp(uniqid,bundle,mobile).map(new Func1<ResponseBody, Coupon>() {
+            @Override
+            public Coupon call(ResponseBody responseBody) {
+                String data=null;
+                Gson gson = new Gson();
+                try {
+                    JSONObject jsonObject = new JSONObject(responseBody.string());
+
+                    if (1 == jsonObject.getInt("status")) {
+                        data=jsonObject.getString("data");
+                        Coupon coupon = gson.fromJson(data,Coupon.class);
+                        return coupon;
+                    } else {
+                        throw new RuntimeException(jsonObject.getString("msg"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("抢券失败，请稍后重试");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("抢券失败，请稍后重试");
+
                 }
             }
         });
@@ -121,6 +167,23 @@ public class NetApi {
     }
 
     //修改密码
+
+    //修改手机号
+    public Observable<Integer> modifyTel(String uid, String newTel, String verify) {
+        return netService.modifyTelHttp(uid,newTel,verify).map(new Func1<ResponseBody, Integer>() {
+            @Override
+            public Integer call(ResponseBody responseBody) {
+                try {
+                    String result = responseBody.string();
+                    Log.d("NetApi", "result:" + result);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+        });
+    }
 
     //修改昵称或性别
     public Observable<UserInfo> updateUserInfo(String uid, @Nullable String name, @Nullable Integer sex) {

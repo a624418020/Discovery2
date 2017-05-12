@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -46,13 +47,14 @@ public class ParticipateListActivity extends AppCompatActivity implements Partic
         list=new ArrayList<>();
         participatePresenter=new ParticipatePresenter(this);
         participatePresenter.getData(DiscoverApplication.getUser().getUid());
+        Log.i("UID",DiscoverApplication.getUser().getUid());
         rvParticipate.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         participateAdapter=new ParticipateAdapter(this,list);
         rvParticipate.setAdapter(participateAdapter);
         participateAdapter.setOnItemClickListener(new ParticipateAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int id) {
-                Intent intent = new Intent(ParticipateListActivity.this, DetailsActivity.class);
+                Intent intent = new Intent(ParticipateListActivity.this, ParticipationDetailsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("Collection", list.get(id));
                 intent.putExtras(bundle);

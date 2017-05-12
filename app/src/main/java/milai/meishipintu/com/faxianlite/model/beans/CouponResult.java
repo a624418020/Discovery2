@@ -7,7 +7,7 @@ package milai.meishipintu.com.faxianlite.model.beans;
 public class CouponResult {
 
     private int status;
-    private String info;
+    private String msg;
     private Coupon data;
 
     public int getStatus() {
@@ -19,11 +19,11 @@ public class CouponResult {
     }
 
     public String getInfo() {
-        return info;
+        return msg;
     }
 
     public void setInfo(String info) {
-        this.info = info;
+        this.msg = info;
     }
 
     public Coupon getCoupon() {
@@ -38,7 +38,7 @@ public class CouponResult {
     public String toString() {
         return "CouponResult{" +
                 "status=" + status +
-                ", info='" + info + '\'' +
+                ", msg='" + msg + '\'' +
                 ", data=" + data +
                 '}';
     }

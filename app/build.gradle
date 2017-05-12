@@ -4,12 +4,24 @@ android {
     compileSdkVersion 25
     buildToolsVersion '25.0.2'
     defaultConfig {
-        applicationId "milai.meishipintu.com.tongcheng"
+        applicationId "milai.meishipintu.com.faxianlite"
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "9d1331c8ce4d138e0a6f861b", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "faxian-Android", //用户渠道统计的渠道名称
+        ]
     }
     buildTypes {
         release {
@@ -45,6 +57,20 @@ dependencies {
     //rollViewPager
     compile 'com.jude:rollviewpager:1.4.6'
     //Bugly
-    compile 'com.tencent.bugly:crashreport:latest.release'
-
+    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    //zxing
+    compile 'com.google.zxing:core:3.3.0'
+    //umeng
+    compile files('libs/SocialSDK_WeiXin_Full.jar')
+    compile files('libs/umeng_shareboard_widget.jar')
+    compile files('libs/umeng_social_api.jar')
+    compile files('libs/umeng_social_net.jar')
+    compile files('libs/umeng_social_shareboard.jar')
+    compile files('libs/umeng_social_tool.jar')
+    compile files('libs/wechat-sdk-android-with-mta-1.1.6.jar')
+    //高德定位
+    compile 'com.amap.api:location:3.4.0'
+    //JPush
+    compile 'cn.jiguang.sdk:jpush:3.0.5'  // 此处以JPush 3.0.5 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.1.2'  // 此处以JCore 1.1.2 版本为例。
 }

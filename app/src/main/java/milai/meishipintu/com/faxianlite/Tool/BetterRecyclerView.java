@@ -15,9 +15,10 @@ public class BetterRecyclerView extends RecyclerView {
 
     private float slideDistance = 0; // 滑动的距离
     private int scrollY = 0; // y轴当前的位置
-    private int totalPage = 5; // 总页数
+    private int totalPage ; // 总页数
     private int shortestDistance; // 超过此距离的滑动才有效
     private int currentPage = 1; // 当前页
+
 
     public BetterRecyclerView(Context context) {
         this(context, null);
@@ -41,6 +42,7 @@ public class BetterRecyclerView extends RecyclerView {
       */
     private int scrollState = 0; // 滚动状态
 
+
     @Override
     public boolean onTouchEvent(MotionEvent e) {
         if(e.getAction() == MotionEvent.ACTION_DOWN) {
@@ -59,7 +61,9 @@ public class BetterRecyclerView extends RecyclerView {
 
     @Override
     public void onScrollStateChanged(int state) {
+        totalPage=getLayoutManager().getItemCount();
         Log.i("aaa","aaa");
+        Log.i("ChildCount",getChildCount()+"");
         //获取开始滚动时所在页面的index
         switch (state) {
             case 2:
@@ -105,7 +109,6 @@ public class BetterRecyclerView extends RecyclerView {
         if (scrollState == 1) {
             slideDistance += dy;
             Log.i("aaa",slideDistance+"");
-
         }
 
         super.onScrolled(dx, dy);
